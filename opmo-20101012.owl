@@ -46,7 +46,7 @@
             >Luc Moreau, Simon Miles, Paolo Missier, Paul Groth, Joe Futrelle, Li Ding,  Daniel Garijo Verdejo, Jeff Pan, Jun Zhao, Mike Jewell</dc:contributor>
         <dc:title xml:lang="en"
             >The OWL Ontology for the Open Provenance Model</dc:title>
-        <owl:imports rdf:resource="https://raw.githubusercontent.com/lucmoreau/OpenProvenanceModel/master/elmo/src/main/resources/opmv.owl"/>
+        <owl:imports rdf:resource="https://raw.githubusercontent.com/chunhualiao/ontologies/main/opmv.owl"/>
     </owl:Ontology>
     
 
