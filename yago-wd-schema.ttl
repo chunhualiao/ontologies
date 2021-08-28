@@ -1,0 +1,3464 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYearMonth
+xsd:gYearMonth rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://bioschemas.org/bioChemInteraction
+<http://bioschemas.org/bioChemInteraction> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <http://bioschemas.org/BioChemEntity> ;
+                                           rdfs:range <http://bioschemas.org/BioChemEntity> .
+
+
+###  http://bioschemas.org/encodesBioChemEntity
+<http://bioschemas.org/encodesBioChemEntity> rdf:type owl:ObjectProperty ;
+                                             owl:inverseOf <http://bioschemas.org/isEncodedByBioChemEntity> ;
+                                             rdfs:domain <http://bioschemas.org/Gene> ;
+                                             rdfs:range <http://bioschemas.org/BioChemEntity> .
+
+
+###  http://bioschemas.org/expressedIn
+<http://bioschemas.org/expressedIn> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://bioschemas.org/Gene> ;
+                                    rdfs:range <http://schema.org/Thing> .
+
+
+###  http://bioschemas.org/hasMolecularFunction
+<http://bioschemas.org/hasMolecularFunction> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://bioschemas.org/BioChemEntity> ;
+                                             rdfs:range <http://schema.org/Thing> .
+
+
+###  http://bioschemas.org/isEncodedByBioChemEntity
+<http://bioschemas.org/isEncodedByBioChemEntity> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://bioschemas.org/BioChemEntity> ;
+                                                 rdfs:range <http://bioschemas.org/Gene> .
+
+
+###  http://bioschemas.org/isInvolvedInBiologicalProcess
+<http://bioschemas.org/isInvolvedInBiologicalProcess> rdf:type owl:ObjectProperty ;
+                                                      rdfs:domain <http://bioschemas.org/BioChemEntity> ;
+                                                      rdfs:range <http://schema.org/Thing> .
+
+
+###  http://bioschemas.org/isLocatedInSubcellularLocation
+<http://bioschemas.org/isLocatedInSubcellularLocation> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <http://bioschemas.org/BioChemEntity> ;
+                                                       rdfs:range <http://schema.org/Thing> .
+
+
+###  http://bioschemas.org/parentTaxon
+<http://bioschemas.org/parentTaxon> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://bioschemas.org/Taxon> ;
+                                    rdfs:range <http://bioschemas.org/Taxon> .
+
+
+###  http://bioschemas.org/taxonRank
+<http://bioschemas.org/taxonRank> rdf:type owl:ObjectProperty ,
+                                           owl:FunctionalProperty ;
+                                  rdfs:domain <http://bioschemas.org/Taxon> ;
+                                  rdfs:range <http://schema.org/Thing> .
+
+
+###  http://schema.org/about
+<http://schema.org/about> rdf:type owl:ObjectProperty ;
+                          owl:inverseOf <http://schema.org/subjectOf> ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/CreativeWork>
+                                                      <http://schema.org/Event>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/Thing> ;
+                          rdfs:comment "The subject matter of the content." ;
+                          rdfs:label "about" .
+
+
+###  http://schema.org/actor
+<http://schema.org/actor> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/CreativeWorkSeason>
+                                                      <http://schema.org/Episode>
+                                                      <http://schema.org/Movie>
+                                                      <http://schema.org/MovieSeries>
+                                                      <http://schema.org/RadioSeries>
+                                                      <http://schema.org/TVSeries>
+                                                      <http://schema.org/VideoGame>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/Person> ;
+                          rdfs:comment "An actor, e.g. in tv, radio, movie, video games etc., or in an event. Actors can be associated with individual items or with a series, episode, clip." ;
+                          rdfs:label "actor" .
+
+
+###  http://schema.org/affiliation
+<http://schema.org/affiliation> rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf <http://schema.org/memberOf> ;
+                                rdfs:domain <http://schema.org/Person> ;
+                                rdfs:range <http://schema.org/Organization> ;
+                                rdfs:comment "An organization that this person is affiliated with. For example, a school/university, a club, or a team." ;
+                                rdfs:label "affiliation" .
+
+
+###  http://schema.org/albumRelease
+<http://schema.org/albumRelease> rdf:type owl:ObjectProperty ;
+                                 owl:inverseOf <http://schema.org/releaseOf> .
+
+
+###  http://schema.org/alumni
+<http://schema.org/alumni> rdf:type owl:ObjectProperty ;
+                           owl:inverseOf <http://schema.org/alumniOf> .
+
+
+###  http://schema.org/alumniOf
+<http://schema.org/alumniOf> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/Person> ;
+                             rdfs:range <http://schema.org/Organization> ;
+                             rdfs:comment "An organization that the person is an alumni of." ;
+                             rdfs:label "alumni of" .
+
+
+###  http://schema.org/author
+<http://schema.org/author> rdf:type owl:ObjectProperty ;
+                           rdfs:domain <http://schema.org/CreativeWork> ;
+                           rdfs:range [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/Organization>
+                                                      <http://schema.org/Person>
+                                                    )
+                                      ] ;
+                           rdfs:comment "The author of this content or rating. Please note that author is special in that HTML 5 provides a special mechanism for indicating authorship via the rel tag. That is equivalent to this and may be used interchangeably." ;
+                           rdfs:label "author" .
+
+
+###  http://schema.org/award
+<http://schema.org/award> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/CreativeWork>
+                                                      <http://schema.org/Organization>
+                                                      <http://schema.org/Person>
+                                                      <http://schema.org/Product>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/Thing> ;
+                          rdfs:comment "An award won by or for this item." ;
+                          rdfs:label "award" .
+
+
+###  http://schema.org/birthPlace
+<http://schema.org/birthPlace> rdf:type owl:ObjectProperty ,
+                                        owl:FunctionalProperty ;
+                               rdfs:domain <http://schema.org/Person> ;
+                               rdfs:range <http://schema.org/Place> ;
+                               rdfs:comment "The place where the person was born." ;
+                               rdfs:label "birth place" .
+
+
+###  http://schema.org/brand
+<http://schema.org/brand> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/Organization>
+                                                      <http://schema.org/Person>
+                                                      <http://schema.org/Product>
+                                                    )
+                                      ] ;
+                          rdfs:range [ rdf:type owl:Class ;
+                                       owl:unionOf ( <http://schema.org/Brand>
+                                                     <http://schema.org/Organization>
+                                                   )
+                                     ] ;
+                          rdfs:comment "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person." ;
+                          rdfs:label "brand" .
+
+
+###  http://schema.org/byArtist
+<http://schema.org/byArtist> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/MusicAlbum> ;
+                             rdfs:range <http://schema.org/MusicGroup> ;
+                             rdfs:comment "The artist that performed this album or recording." ;
+                             rdfs:label "by artist" .
+
+
+###  http://schema.org/character
+<http://schema.org/character> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/CreativeWork> ;
+                              rdfs:range <http://schema.org/Person> ;
+                              rdfs:comment "Fictional person connected with a creative work." ;
+                              rdfs:label "character" .
+
+
+###  http://schema.org/children
+<http://schema.org/children> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/Person> ;
+                             rdfs:range <http://schema.org/Person> ;
+                             rdfs:comment "A child of the person." ;
+                             rdfs:label "children" .
+
+
+###  http://schema.org/citation
+<http://schema.org/citation> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/CreativeWork> ;
+                             rdfs:range <http://schema.org/CreativeWork> ;
+                             rdfs:comment "A citation or reference to another creative work, such as another publication, web page, scholarly article, etc." ;
+                             rdfs:label "citation" .
+
+
+###  http://schema.org/colorist
+<http://schema.org/colorist> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/ComicStory>
+                                                         <http://schema.org/VisualArtwork>
+                                                       )
+                                         ] ;
+                             rdfs:range <http://schema.org/Person> ;
+                             rdfs:comment "The individual who adds color to inked drawings." ;
+                             rdfs:label "colorist"@en .
+
+
+###  http://schema.org/competitor
+<http://schema.org/competitor> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <http://schema.org/SportsEvent> ;
+                               rdfs:range [ rdf:type owl:Class ;
+                                            owl:unionOf ( <http://schema.org/Person>
+                                                          <http://schema.org/SportsTeam>
+                                                        )
+                                          ] ;
+                               rdfs:comment "A competitor in a sports event." ;
+                               rdfs:label "competitor" .
+
+
+###  http://schema.org/composer
+<http://schema.org/composer> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Event>
+                                                         <http://schema.org/MusicComposition>
+                                                       )
+                                         ] ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/MusicGroup>
+                                                        <http://schema.org/Person>
+                                                      )
+                                        ] ;
+                             rdfs:comment "The person or organization who wrote a composition, or who is the composer of a work performed at some event." ;
+                             rdfs:label "composer" .
+
+
+###  http://schema.org/connectedTo
+<http://schema.org/connectedTo> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/AnatomicalStructure> ;
+                                rdfs:range <http://schema.org/AnatomicalStructure> ;
+                                rdfs:comment "Other anatomical structures to which this structure is connected." ;
+                                rdfs:label "connected to" .
+
+
+###  http://schema.org/containedInPlace
+<http://schema.org/containedInPlace> rdf:type owl:ObjectProperty ;
+                                     owl:inverseOf <http://schema.org/containsPlace> ;
+                                     rdfs:domain <http://schema.org/Place> ;
+                                     rdfs:range <http://schema.org/Place> ;
+                                     rdfs:comment "The basic containment relation between a place and one that contains it." ;
+                                     rdfs:label "contained in place" .
+
+
+###  http://schema.org/containsPlace
+<http://schema.org/containsPlace> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://schema.org/Place> ;
+                                  rdfs:range <http://schema.org/Place> ;
+                                  rdfs:comment "The basic containment relation between a place and another that it contains." ;
+                                  rdfs:label "contains place" .
+
+
+###  http://schema.org/contentLocation
+<http://schema.org/contentLocation> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/CreativeWork> ;
+                                    rdfs:range <http://schema.org/Place> ;
+                                    rdfs:comment "The location depicted or described in the content. For example, the location in a photograph or painting." ;
+                                    rdfs:label "content location" .
+
+
+###  http://schema.org/contentRating
+<http://schema.org/contentRating> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://schema.org/CreativeWork> ;
+                                  rdfs:range <http://schema.org/Rating> ;
+                                  rdfs:comment "Official rating of a piece of content&#x2014;for example,'MPAA PG-13'." ;
+                                  rdfs:label "content rating" .
+
+
+###  http://schema.org/contributor
+<http://schema.org/contributor> rdf:type owl:ObjectProperty ;
+                                rdfs:domain [ rdf:type owl:Class ;
+                                              owl:unionOf ( <http://schema.org/CreativeWork>
+                                                            <http://schema.org/Event>
+                                                          )
+                                            ] ;
+                                rdfs:range [ rdf:type owl:Class ;
+                                             owl:unionOf ( <http://schema.org/Organization>
+                                                           <http://schema.org/Person>
+                                                         )
+                                           ] ;
+                                rdfs:comment "A secondary contributor to the CreativeWork or Event." ;
+                                rdfs:label "contributor" .
+
+
+###  http://schema.org/copyrightHolder
+<http://schema.org/copyrightHolder> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/CreativeWork> ;
+                                    rdfs:range [ rdf:type owl:Class ;
+                                                 owl:unionOf ( <http://schema.org/Organization>
+                                                               <http://schema.org/Person>
+                                                             )
+                                               ] ;
+                                    rdfs:comment "The party holding the legal copyright to the CreativeWork." ;
+                                    rdfs:label "copyright holder" .
+
+
+###  http://schema.org/countryOfOrigin
+<http://schema.org/countryOfOrigin> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain [ rdf:type owl:Class ;
+                                                  owl:unionOf ( <http://schema.org/Movie>
+                                                                <http://schema.org/TVEpisode>
+                                                                <http://schema.org/TVSeason>
+                                                                <http://schema.org/TVSeries>
+                                                              )
+                                                ] ;
+                                    rdfs:range <http://schema.org/Country> ;
+                                    rdfs:comment "The country of the principal offices of the production company or individual responsible for the movie or program." ;
+                                    rdfs:label "country of origin" .
+
+
+###  http://schema.org/creator
+<http://schema.org/creator> rdf:type owl:ObjectProperty ;
+                            rdfs:domain <http://schema.org/CreativeWork> ;
+                            rdfs:range [ rdf:type owl:Class ;
+                                         owl:unionOf ( <http://schema.org/Organization>
+                                                       <http://schema.org/Person>
+                                                     )
+                                       ] ;
+                            rdfs:comment "The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork." ;
+                            rdfs:label "creator" .
+
+
+###  http://schema.org/deathPlace
+<http://schema.org/deathPlace> rdf:type owl:ObjectProperty ,
+                                        owl:FunctionalProperty ;
+                               rdfs:domain <http://schema.org/Person> ;
+                               rdfs:range <http://schema.org/Place> ;
+                               rdfs:comment "The place where the person died." ;
+                               rdfs:label "death place" .
+
+
+###  http://schema.org/depth
+<http://schema.org/depth> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/Product>
+                                                      <http://schema.org/VisualArtwork>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/QuantitativeValue> ;
+                          rdfs:comment "The depth of the item." ;
+                          rdfs:label "depth" .
+
+
+###  http://schema.org/director
+<http://schema.org/director> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Episode>
+                                                         <http://schema.org/Movie>
+                                                         <http://schema.org/MovieSeries>
+                                                         <http://schema.org/RadioSeries>
+                                                         <http://schema.org/TVSeries>
+                                                         <http://schema.org/VideoGame>
+                                                         <http://schema.org/VideoGameSeries>
+                                                       )
+                                         ] ;
+                             rdfs:range <http://schema.org/Person> ;
+                             rdfs:comment "A director of e.g. tv, radio, movie, video gaming etc. content, or of an event. Directors can be associated with individual items or with a series, episode, clip." ;
+                             rdfs:label "director" .
+
+
+###  http://schema.org/editor
+<http://schema.org/editor> rdf:type owl:ObjectProperty ;
+                           rdfs:domain <http://schema.org/CreativeWork> ;
+                           rdfs:range <http://schema.org/Person> ;
+                           rdfs:comment "Specifies the Person who edited the CreativeWork." ;
+                           rdfs:label "editor" .
+
+
+###  http://schema.org/elevation
+<http://schema.org/elevation> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/Place> ;
+                              rdfs:range <http://schema.org/QuantitativeValue> ;
+                              rdfs:comment "The elevation of a location (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>). Values may be of the form 'NUMBER UNIT<em>OF</em>MEASUREMENT' (e.g., '1,000 m', '3,200 ft') while numbers alone should be assumed to be a value in meters." ;
+                              rdfs:label "elevation" .
+
+
+###  http://schema.org/exampleOfWork
+<http://schema.org/exampleOfWork> rdf:type owl:ObjectProperty ;
+                                  owl:inverseOf <http://schema.org/workExample> ;
+                                  rdfs:domain <http://schema.org/CreativeWork> ;
+                                  rdfs:range <http://schema.org/CreativeWork> ;
+                                  rdfs:comment "A creative work that this work is an example/instance/realization/derivation of." ;
+                                  rdfs:label "example of work" .
+
+
+###  http://schema.org/familyName
+<http://schema.org/familyName> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <http://schema.org/Person> ;
+                               rdfs:range <http://schema.org/Thing> ;
+                               rdfs:comment "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property." ;
+                               rdfs:label "family name" .
+
+
+###  http://schema.org/founder
+<http://schema.org/founder> rdf:type owl:ObjectProperty ;
+                            rdfs:domain <http://schema.org/Organization> ;
+                            rdfs:range <http://schema.org/Person> ;
+                            rdfs:comment "A person who founded this organization." ;
+                            rdfs:label "founder" .
+
+
+###  http://schema.org/foundingLocation
+<http://schema.org/foundingLocation> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://schema.org/Organization> ;
+                                     rdfs:range <http://schema.org/Place> ;
+                                     rdfs:comment "The place where the Organization was founded." ;
+                                     rdfs:label "founding location" .
+
+
+###  http://schema.org/gender
+<http://schema.org/gender> rdf:type owl:ObjectProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:domain <http://schema.org/Person> ;
+                           rdfs:range <http://schema.org/Thing> ;
+                           rdfs:comment "Gender of something, typically a <a class=\"localLink\" href=\"http://schema.org/Person\">Person</a>, but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The <a class=\"localLink\" href=\"http://schema.org/gender\">gender</a> property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender <a class=\"localLink\" href=\"http://schema.org/SportsTeam\">SportsTeam</a> can be indicated with a text value of \"Mixed\"." ;
+                           rdfs:label "gender" .
+
+
+###  http://schema.org/genre
+<http://schema.org/genre> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/CreativeWork>
+                                                      <http://schema.org/MusicGroup>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/Thing> ;
+                          rdfs:comment "Genre of the creative work, broadcast channel or group." ;
+                          rdfs:label "genre" .
+
+
+###  http://schema.org/geo
+<http://schema.org/geo> rdf:type owl:ObjectProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain <http://schema.org/Place> ;
+                        rdfs:range <http://schema.org/GeoCoordinates> ;
+                        rdfs:comment "The geo coordinates of the place." ;
+                        rdfs:label "geo" .
+
+
+###  http://schema.org/givenName
+<http://schema.org/givenName> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/Person> ;
+                              rdfs:range <http://schema.org/Thing> ;
+                              rdfs:comment "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property." ;
+                              rdfs:label "given name" .
+
+
+###  http://schema.org/hasOccupation
+<http://schema.org/hasOccupation> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://schema.org/Person> ;
+                                  rdfs:range <http://schema.org/Occupation> ;
+                                  rdfs:comment "The Person's occupation. For past professions, use Role for expressing dates." ;
+                                  rdfs:label "has occupation" .
+
+
+###  http://schema.org/hasPart
+<http://schema.org/hasPart> rdf:type owl:ObjectProperty ;
+                            owl:inverseOf <http://schema.org/isPartOf> ;
+                            rdfs:domain <http://schema.org/CreativeWork> ;
+                            rdfs:range <http://schema.org/CreativeWork> ;
+                            rdfs:comment "Indicates an item or CreativeWork that is part of this item, or CreativeWork (in some sense)." ;
+                            rdfs:label "has part" .
+
+
+###  http://schema.org/height
+<http://schema.org/height> rdf:type owl:ObjectProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:domain [ rdf:type owl:Class ;
+                                         owl:unionOf ( <http://schema.org/Person>
+                                                       <http://schema.org/Product>
+                                                       <http://schema.org/VisualArtwork>
+                                                     )
+                                       ] ;
+                           rdfs:range <http://schema.org/QuantitativeValue> ;
+                           rdfs:comment "The height of the item." ;
+                           rdfs:label "height" .
+
+
+###  http://schema.org/homeLocation
+<http://schema.org/homeLocation> rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://schema.org/location> ;
+                                 rdfs:domain <http://schema.org/Person> ;
+                                 rdfs:range <http://schema.org/Place> ;
+                                 rdfs:comment "A contact location for a person's residence." ;
+                                 rdfs:label "home location" .
+
+
+###  http://schema.org/honorificPrefix
+<http://schema.org/honorificPrefix> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/Person> ;
+                                    rdfs:range <http://schema.org/Thing> ;
+                                    rdfs:comment "An honorific prefix preceding a Person's name such as Dr/Mrs/Mr." ;
+                                    rdfs:label "honorific prefix" .
+
+
+###  http://schema.org/illustrator
+<http://schema.org/illustrator> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/Book> ;
+                                rdfs:range <http://schema.org/Person> ;
+                                rdfs:comment "The illustrator of the book." ;
+                                rdfs:label "illustrator" .
+
+
+###  http://schema.org/image
+<http://schema.org/image> rdf:type owl:ObjectProperty ;
+                          rdfs:domain <http://schema.org/Thing> ;
+                          rdfs:range <http://schema.org/ImageObject> ;
+                          rdfs:comment "An image of the item. This can be a <a class=\"localLink\" href=\"http://schema.org/URL\">URL</a> or a fully described <a class=\"localLink\" href=\"http://schema.org/ImageObject\">ImageObject</a>." ;
+                          rdfs:label "image" .
+
+
+###  http://schema.org/inLanguage
+<http://schema.org/inLanguage> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <http://schema.org/CreativeWork> ;
+                               rdfs:range <http://schema.org/Language> ;
+                               rdfs:comment "The language of the content or performance or used in an action. Please use one of the language codes from the <a href=\"http://tools.ietf.org/html/bcp47\">IETF BCP 47 standard</a>. See also <a class=\"localLink\" href=\"http://schema.org/availableLanguage\">availableLanguage</a>." ;
+                               rdfs:label "in language" .
+
+
+###  http://schema.org/isBasedOn
+<http://schema.org/isBasedOn> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/CreativeWork> ;
+                              rdfs:range <http://schema.org/CreativeWork> ;
+                              rdfs:comment "A resource from which this work is derived or from which it is a modification or adaption." ;
+                              rdfs:label "is based on" .
+
+
+###  http://schema.org/isPartOf
+<http://schema.org/isPartOf> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/CreativeWork> ;
+                             rdfs:range <http://schema.org/CreativeWork> ;
+                             rdfs:comment "Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of." ;
+                             rdfs:label "is part of" .
+
+
+###  http://schema.org/knowsLanguage
+<http://schema.org/knowsLanguage> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain [ rdf:type owl:Class ;
+                                                owl:unionOf ( <http://schema.org/Organization>
+                                                              <http://schema.org/Person>
+                                                            )
+                                              ] ;
+                                  rdfs:range <http://schema.org/Language> ;
+                                  rdfs:comment "Of a <a class=\"localLink\" href=\"http://schema.org/Person\">Person</a>, and less typically of an <a class=\"localLink\" href=\"http://schema.org/Organization\">Organization</a>, to indicate a known language. We do not distinguish skill levels or reading/writing/speaking/signing here. Use language codes from the <a href=\"http://tools.ietf.org/html/bcp47\">IETF BCP 47 standard</a>." ;
+                                  rdfs:label "knows language" .
+
+
+###  http://schema.org/legalStatus
+<http://schema.org/legalStatus> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/MedicalEntity> ;
+                                rdfs:range <http://schema.org/DrugLegalStatus> ;
+                                rdfs:comment "The drug or supplement's legal status, including any controlled substance schedules that apply." ;
+                                rdfs:label "legal status" .
+
+
+###  http://schema.org/license
+<http://schema.org/license> rdf:type owl:ObjectProperty ;
+                            rdfs:domain <http://schema.org/CreativeWork> ;
+                            rdfs:range <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A license document that applies to this content, typically indicated by URL." ;
+                            rdfs:label "license" .
+
+
+###  http://schema.org/location
+<http://schema.org/location> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Event>
+                                                         <http://schema.org/Organization>
+                                                       )
+                                         ] ;
+                             rdfs:range <http://schema.org/Place> ;
+                             rdfs:comment "The location of for example where the event is happening, an organization is located, or where an action takes place." ;
+                             rdfs:label "location" .
+
+
+###  http://schema.org/locationCreated
+<http://schema.org/locationCreated> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/CreativeWork> ;
+                                    rdfs:range <http://schema.org/Place> ;
+                                    rdfs:comment "The location where the CreativeWork was created, which may not be the same as the location depicted in the CreativeWork." ;
+                                    rdfs:label "location created" .
+
+
+###  http://schema.org/logo
+<http://schema.org/logo> rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf <http://schema.org/image> ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( <http://schema.org/Brand>
+                                                     <http://schema.org/Organization>
+                                                     <http://schema.org/Place>
+                                                     <http://schema.org/Product>
+                                                   )
+                                     ] ;
+                         rdfs:range <http://schema.org/ImageObject> ;
+                         rdfs:comment "An associated logo." ;
+                         rdfs:label "logo" .
+
+
+###  http://schema.org/lyricist
+<http://schema.org/lyricist> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/MusicComposition> ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/MusicGroup>
+                                                        <http://schema.org/Person>
+                                                      )
+                                        ] ;
+                             rdfs:comment "The person who wrote the words." ;
+                             rdfs:label "lyricist" .
+
+
+###  http://schema.org/material
+<http://schema.org/material> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/CreativeWork>
+                                                         <http://schema.org/Product>
+                                                       )
+                                         ] ;
+                             rdfs:range <http://schema.org/Thing> ;
+                             rdfs:comment "A material that something is made from, e.g. leather, wool, cotton, paper." ;
+                             rdfs:label "material" .
+
+
+###  http://schema.org/member
+<http://schema.org/member> rdf:type owl:ObjectProperty ;
+                           owl:inverseOf <http://schema.org/memberOf> .
+
+
+###  http://schema.org/memberOf
+<http://schema.org/memberOf> rdf:type owl:ObjectProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Organization>
+                                                         <http://schema.org/Person>
+                                                       )
+                                         ] ;
+                             rdfs:range <http://schema.org/Organization> ;
+                             rdfs:comment "An Organization (or ProgramMembership) to which this Person or Organization belongs." ;
+                             rdfs:label "member of" .
+
+
+###  http://schema.org/musicBy
+<http://schema.org/musicBy> rdf:type owl:ObjectProperty ;
+                            rdfs:domain [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/Episode>
+                                                        <http://schema.org/Movie>
+                                                        <http://schema.org/MovieSeries>
+                                                        <http://schema.org/RadioSeries>
+                                                        <http://schema.org/TVSeries>
+                                                        <http://schema.org/VideoGame>
+                                                        <http://schema.org/VideoGameSeries>
+                                                      )
+                                        ] ;
+                            rdfs:range [ rdf:type owl:Class ;
+                                         owl:unionOf ( <http://schema.org/MusicGroup>
+                                                       <http://schema.org/Person>
+                                                     )
+                                       ] ;
+                            rdfs:comment "The composer of the soundtrack." ;
+                            rdfs:label "music by" .
+
+
+###  http://schema.org/musicReleaseFormat
+<http://schema.org/musicReleaseFormat> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://schema.org/MusicRelease> ;
+                                       rdfs:range <http://schema.org/Thing> ;
+                                       rdfs:comment "Format of this release (the type of recording media used, ie. compact disc, digital media, LP, etc.)." ;
+                                       rdfs:label "music release format" .
+
+
+###  http://schema.org/nationality
+<http://schema.org/nationality> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/Person> ;
+                                rdfs:range <http://schema.org/Country> ;
+                                rdfs:comment "Nationality of the person." ;
+                                rdfs:label "nationality" .
+
+
+###  http://schema.org/netWorth
+<http://schema.org/netWorth> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/Person> ;
+                             rdfs:range <http://schema.org/QuantitativeValue> ;
+                             rdfs:comment "The total financial value of the person as calculated by subtracting assets from liabilities." ;
+                             rdfs:label "net worth" .
+
+
+###  http://schema.org/numberOfEmployees
+<http://schema.org/numberOfEmployees> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://schema.org/Organization> ;
+                                      rdfs:range <http://schema.org/QuantitativeValue> ;
+                                      rdfs:comment "The number of employees in an organization e.g. business." ;
+                                      rdfs:label "number of employees" .
+
+
+###  http://schema.org/operatingSystem
+<http://schema.org/operatingSystem> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/SoftwareApplication> ;
+                                    rdfs:range <http://schema.org/SoftwareApplication> ;
+                                    rdfs:comment "Operating systems supported (Windows 7, OSX 10.6, Android 1.6)." ;
+                                    rdfs:label "operating system" .
+
+
+###  http://schema.org/organizer
+<http://schema.org/organizer> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/Event> ;
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/MusicGroup>
+                                                         <http://schema.org/Person>
+                                                       )
+                                         ] ;
+                              rdfs:comment "An organizer of an Event." ;
+                              rdfs:label "organizer" .
+
+
+###  http://schema.org/owns
+<http://schema.org/owns> rdf:type owl:ObjectProperty ;
+                         rdfs:domain <http://schema.org/Person> ;
+                         rdfs:range <http://schema.org/Product> ;
+                         rdfs:comment "Products owned by the organization or person." ;
+                         rdfs:label "owns" .
+
+
+###  http://schema.org/parent
+<http://schema.org/parent> rdf:type owl:ObjectProperty ;
+                           rdfs:domain <http://schema.org/Person> ;
+                           rdfs:range <http://schema.org/Person> ;
+                           rdfs:comment "A parent of this person." ;
+                           rdfs:label "parent" .
+
+
+###  http://schema.org/parentOrganization
+<http://schema.org/parentOrganization> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <http://schema.org/subOrganization> ;
+                                       rdfs:domain <http://schema.org/Organization> ;
+                                       rdfs:range <http://schema.org/Organization> ;
+                                       rdfs:comment "The larger organization that this organization is a <a class=\"localLink\" href=\"http://schema.org/subOrganization\">subOrganization</a> of, if any." ;
+                                       rdfs:label "parent organization" .
+
+
+###  http://schema.org/partOfSeason
+<http://schema.org/partOfSeason> rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://schema.org/isPartOf> ;
+                                 rdf:type owl:FunctionalProperty ;
+                                 rdfs:domain <http://schema.org/Episode> ;
+                                 rdfs:range <http://schema.org/CreativeWorkSeason> ;
+                                 rdfs:comment "The season to which this episode belongs." ;
+                                 rdfs:label "part of season" .
+
+
+###  http://schema.org/partOfSeries
+<http://schema.org/partOfSeries> rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf <http://schema.org/isPartOf> ;
+                                 rdfs:domain [ rdf:type owl:Class ;
+                                               owl:unionOf ( <http://schema.org/CreativeWorkSeason>
+                                                             <http://schema.org/Episode>
+                                                           )
+                                             ] ;
+                                 rdfs:range <http://schema.org/CreativeWorkSeries> ;
+                                 rdfs:comment "The series to which this episode or season belongs." ;
+                                 rdfs:label "part of series" .
+
+
+###  http://schema.org/possibleTreatment
+<http://schema.org/possibleTreatment> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain [ rdf:type owl:Class ;
+                                                    owl:unionOf ( <http://schema.org/MedicalCondition>
+                                                                  <http://schema.org/MedicalSignOrSymptom>
+                                                                )
+                                                  ] ;
+                                      rdfs:range <http://schema.org/MedicalTherapy> ;
+                                      rdfs:comment "A possible treatment to address this condition, sign or symptom." ;
+                                      rdfs:label "possible treatment" .
+
+
+###  http://schema.org/producer
+<http://schema.org/producer> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/CreativeWork> ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/Organization>
+                                                        <http://schema.org/Person>
+                                                      )
+                                        ] ;
+                             rdfs:comment "The person or organization who produced the work (e.g. music album, movie, tv/radio series etc.)." ;
+                             rdfs:label "producer" .
+
+
+###  http://schema.org/productionCompany
+<http://schema.org/productionCompany> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain [ rdf:type owl:Class ;
+                                                    owl:unionOf ( <http://schema.org/CreativeWorkSeason>
+                                                                  <http://schema.org/Episode>
+                                                                  <http://schema.org/Movie>
+                                                                  <http://schema.org/MovieSeries>
+                                                                  <http://schema.org/RadioSeries>
+                                                                  <http://schema.org/TVSeries>
+                                                                  <http://schema.org/VideoGameSeries>
+                                                                )
+                                                  ] ;
+                                      rdfs:range <http://schema.org/Organization> ;
+                                      rdfs:comment "The production company or studio responsible for the item e.g. series, video game, episode etc." ;
+                                      rdfs:label "production company" .
+
+
+###  http://schema.org/provider
+<http://schema.org/provider> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/CreativeWork> ;
+                             rdfs:range [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/Organization>
+                                                        <http://schema.org/Person>
+                                                      )
+                                        ] ;
+                             rdfs:comment "The service provider, service operator, or service performer; the goods producer. Another party (a seller) may offer those services or goods on behalf of the provider. A provider may also serve as the seller." ;
+                             rdfs:label "provider" .
+
+
+###  http://schema.org/publisher
+<http://schema.org/publisher> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/CreativeWork> ;
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Organization>
+                                                         <http://schema.org/Person>
+                                                       )
+                                         ] ;
+                              rdfs:comment "The publisher of the creative work." ;
+                              rdfs:label "publisher" .
+
+
+###  http://schema.org/recordLabel
+<http://schema.org/recordLabel> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/MusicRelease> ;
+                                rdfs:range <http://schema.org/Organization> ;
+                                rdfs:comment "The label that issued the release." ;
+                                rdfs:label "record label" .
+
+
+###  http://schema.org/releaseOf
+<http://schema.org/releaseOf> rdf:type owl:ObjectProperty ;
+                              rdfs:domain <http://schema.org/MusicRelease> ;
+                              rdfs:range <http://schema.org/MusicAlbum> ;
+                              rdfs:comment "The album this is a release of." ;
+                              rdfs:label "release of" .
+
+
+###  http://schema.org/relevantSpecialty
+<http://schema.org/relevantSpecialty> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://schema.org/MedicalEntity> ;
+                                      rdfs:range <http://schema.org/MedicalSpecialty> ;
+                                      rdfs:comment "If applicable, a medical specialty in which this entity is relevant." ;
+                                      rdfs:label "relevant specialty" .
+
+
+###  http://schema.org/riskFactor
+<http://schema.org/riskFactor> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <http://schema.org/MedicalCondition> ;
+                               rdfs:range <http://schema.org/Thing> ;
+                               rdfs:comment "A modifiable or non-modifiable factor that increases the risk of a patient contracting this condition, e.g. age,  coexisting condition." ;
+                               rdfs:label "risk factor" .
+
+
+###  http://schema.org/servesCuisine
+<http://schema.org/servesCuisine> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://schema.org/FoodEstablishment> ;
+                                  rdfs:range <http://schema.org/Thing> ;
+                                  rdfs:comment "The cuisine of the restaurant." ;
+                                  rdfs:label "serves cuisine" .
+
+
+###  http://schema.org/signOrSymptom
+<http://schema.org/signOrSymptom> rdf:type owl:ObjectProperty ;
+                                  rdfs:domain <http://schema.org/MedicalCondition> ;
+                                  rdfs:range <http://schema.org/MedicalSignOrSymptom> ;
+                                  rdfs:comment "A sign or symptom of this condition. Signs are objective or physically observable manifestations of the medical condition while symptoms are the subjective experience of the medical condition." ;
+                                  rdfs:label "sign or symptom" .
+
+
+###  http://schema.org/sponsor
+<http://schema.org/sponsor> rdf:type owl:ObjectProperty ;
+                            rdfs:domain [ rdf:type owl:Class ;
+                                          owl:unionOf ( <http://schema.org/CreativeWork>
+                                                        <http://schema.org/Event>
+                                                        <http://schema.org/Organization>
+                                                      )
+                                        ] ;
+                            rdfs:range [ rdf:type owl:Class ;
+                                         owl:unionOf ( <http://schema.org/Organization>
+                                                       <http://schema.org/Person>
+                                                     )
+                                       ] ;
+                            rdfs:comment "A person or organization that supports a thing through a pledge, promise, or financial contribution. e.g. a sponsor of a Medical Study or a corporate sponsor of an event." ;
+                            rdfs:label "sponsor" .
+
+
+###  http://schema.org/sport
+<http://schema.org/sport> rdf:type owl:ObjectProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/SportsEvent>
+                                                      <http://schema.org/SportsOrganization>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/Thing> ;
+                          rdfs:comment "A type of sport (e.g. Baseball)." ;
+                          rdfs:label "sport" .
+
+
+###  http://schema.org/spouse
+<http://schema.org/spouse> rdf:type owl:ObjectProperty ;
+                           rdfs:domain <http://schema.org/Person> ;
+                           rdfs:range <http://schema.org/Person> ;
+                           rdfs:comment "The person's spouse." ;
+                           rdfs:label "spouse" .
+
+
+###  http://schema.org/subEvent
+<http://schema.org/subEvent> rdf:type owl:ObjectProperty ;
+                             owl:inverseOf <http://schema.org/superEvent> ;
+                             rdfs:domain <http://schema.org/Event> ;
+                             rdfs:range <http://schema.org/Event> ;
+                             rdfs:comment "An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference." ;
+                             rdfs:label "sub event" .
+
+
+###  http://schema.org/subOrganization
+<http://schema.org/subOrganization> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://schema.org/Organization> ;
+                                    rdfs:range <http://schema.org/Organization> ;
+                                    rdfs:comment "A relationship between two organizations where the first includes the second, e.g., as a subsidiary. See also: the more specific 'department' property." ;
+                                    rdfs:label "sub organization" .
+
+
+###  http://schema.org/subjectOf
+<http://schema.org/subjectOf> rdf:type owl:ObjectProperty .
+
+
+###  http://schema.org/superEvent
+<http://schema.org/superEvent> rdf:type owl:ObjectProperty ;
+                               rdfs:domain <http://schema.org/Event> ;
+                               rdfs:range <http://schema.org/Event> ;
+                               rdfs:comment "An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent." ;
+                               rdfs:label "super event" .
+
+
+###  http://schema.org/translator
+<http://schema.org/translator> rdf:type owl:ObjectProperty ;
+                               rdfs:domain [ rdf:type owl:Class ;
+                                             owl:unionOf ( <http://schema.org/CreativeWork>
+                                                           <http://schema.org/Event>
+                                                         )
+                                           ] ;
+                               rdfs:range [ rdf:type owl:Class ;
+                                            owl:unionOf ( <http://schema.org/Organization>
+                                                          <http://schema.org/Person>
+                                                        )
+                                          ] ;
+                               rdfs:comment "Organization or person who adapts a creative work to different languages, regional differences and technical requirements of a target market, or that translates during some event." ;
+                               rdfs:label "translator" .
+
+
+###  http://schema.org/unitCode
+<http://schema.org/unitCode> rdf:type owl:ObjectProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/QuantitativeValue> ;
+                             rdfs:range <http://schema.org/Thing> ;
+                             rdfs:comment "The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon." ;
+                             rdfs:label "unit code" .
+
+
+###  http://schema.org/weight
+<http://schema.org/weight> rdf:type owl:ObjectProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:domain [ rdf:type owl:Class ;
+                                         owl:unionOf ( <http://schema.org/Person>
+                                                       <http://schema.org/Product>
+                                                     )
+                                       ] ;
+                           rdfs:range <http://schema.org/QuantitativeValue> ;
+                           rdfs:comment "The weight of the product or person." ;
+                           rdfs:label "weight" .
+
+
+###  http://schema.org/width
+<http://schema.org/width> rdf:type owl:ObjectProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( <http://schema.org/Product>
+                                                      <http://schema.org/VisualArtwork>
+                                                    )
+                                      ] ;
+                          rdfs:range <http://schema.org/QuantitativeValue> ;
+                          rdfs:comment "The width of the item." ;
+                          rdfs:label "width" .
+
+
+###  http://schema.org/workExample
+<http://schema.org/workExample> rdf:type owl:ObjectProperty ;
+                                rdfs:domain <http://schema.org/CreativeWork> ;
+                                rdfs:range <http://schema.org/CreativeWork> ;
+                                rdfs:comment "Example/instance/realization/derivation of the concept of this creative work. eg. The paperback edition, first edition, or eBook." ;
+                                rdfs:label "work example" .
+
+
+###  http://schema.org/worksFor
+<http://schema.org/worksFor> rdf:type owl:ObjectProperty ;
+                             rdfs:domain <http://schema.org/Person> ;
+                             rdfs:range <http://schema.org/Person> ;
+                             rdfs:comment "Organizations that the person works for." ;
+                             rdfs:label "works for" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://bioschemas.org/inChI
+<http://bioschemas.org/inChI> rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <http://bioschemas.org/MolecularEntity> ;
+                              rdfs:range xsd:string .
+
+
+###  http://bioschemas.org/inChIKey
+<http://bioschemas.org/inChIKey> rdf:type owl:DatatypeProperty ,
+                                          owl:FunctionalProperty ;
+                                 rdfs:domain <http://bioschemas.org/MolecularEntity> ;
+                                 rdfs:range xsd:string .
+
+
+###  http://bioschemas.org/molecularFormula
+<http://bioschemas.org/molecularFormula> rdf:type owl:DatatypeProperty ,
+                                                  owl:FunctionalProperty ;
+                                         rdfs:domain <http://bioschemas.org/MolecularEntity> ;
+                                         rdfs:range xsd:string .
+
+
+###  http://bioschemas.org/smiles
+<http://bioschemas.org/smiles> rdf:type owl:DatatypeProperty ;
+                               rdfs:domain <http://bioschemas.org/MolecularEntity> ;
+                               rdfs:range xsd:string .
+
+
+###  http://schema.org/alternateName
+<http://schema.org/alternateName> rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain <http://schema.org/Thing> ;
+                                  rdfs:range rdf:PlainLiteral ;
+                                  rdfs:comment "An alias for the item." ;
+                                  rdfs:label "alternate name" .
+
+
+###  http://schema.org/birthDate
+<http://schema.org/birthDate> rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <http://schema.org/Person> ;
+                              rdfs:range [ rdf:type rdfs:Datatype ;
+                                           owl:unionOf ( xsd:date
+                                                         xsd:dateTime
+                                                         xsd:gYear
+                                                         xsd:gYearMonth
+                                                       )
+                                         ] ;
+                              rdfs:comment "Date of birth." ;
+                              rdfs:label "birth date" .
+
+
+###  http://schema.org/broadcastChannelId
+<http://schema.org/broadcastChannelId> rdf:type owl:DatatypeProperty ;
+                                       rdfs:domain <http://schema.org/BroadcastChannel> ;
+                                       rdfs:range xsd:string ;
+                                       rdfs:comment "The unique address by which the BroadcastService can be identified in a provider lineup. In US, this is typically a number." ;
+                                       rdfs:label "broadcast channel id" .
+
+
+###  http://schema.org/callSign
+<http://schema.org/callSign> rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf <http://schema.org/identifier> ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/BroadcastService>
+                                                         <http://schema.org/Person>
+                                                         <http://schema.org/Vehicle>
+                                                       )
+                                         ] ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "A <a href=\"https://en.wikipedia.org/wiki/Call_sign\">callsign</a>, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles." ;
+                             rdfs:label "call sign" .
+
+
+###  http://schema.org/dateCreated
+<http://schema.org/dateCreated> rdf:type owl:DatatypeProperty ,
+                                         owl:FunctionalProperty ;
+                                rdfs:domain <http://schema.org/CreativeWork> ;
+                                rdfs:range [ rdf:type rdfs:Datatype ;
+                                             owl:unionOf ( xsd:date
+                                                           xsd:dateTime
+                                                           xsd:gYear
+                                                           xsd:gYearMonth
+                                                         )
+                                           ] ;
+                                rdfs:comment "The date on which the CreativeWork was created or the item was added to a DataFeed." ;
+                                rdfs:label "date created" .
+
+
+###  http://schema.org/datePublished
+<http://schema.org/datePublished> rdf:type owl:DatatypeProperty ,
+                                           owl:FunctionalProperty ;
+                                  rdfs:domain <http://schema.org/CreativeWork> ;
+                                  rdfs:range [ rdf:type rdfs:Datatype ;
+                                               owl:unionOf ( xsd:date
+                                                             xsd:dateTime
+                                                             xsd:gYear
+                                                             xsd:gYearMonth
+                                                           )
+                                             ] ;
+                                  rdfs:comment "Date of first broadcast/publication." ;
+                                  rdfs:label "date published" .
+
+
+###  http://schema.org/deathDate
+<http://schema.org/deathDate> rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <http://schema.org/Person> ;
+                              rdfs:range [ rdf:type rdfs:Datatype ;
+                                           owl:unionOf ( xsd:date
+                                                         xsd:dateTime
+                                                         xsd:gYear
+                                                         xsd:gYearMonth
+                                                       )
+                                         ] ;
+                              rdfs:comment "Date of death." ;
+                              rdfs:label "death date" .
+
+
+###  http://schema.org/dissolutionDate
+<http://schema.org/dissolutionDate> rdf:type owl:DatatypeProperty ,
+                                             owl:FunctionalProperty ;
+                                    rdfs:domain <http://schema.org/Organization> ;
+                                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                                 owl:unionOf ( xsd:date
+                                                               xsd:dateTime
+                                                               xsd:gYear
+                                                               xsd:gYearMonth
+                                                             )
+                                               ] ;
+                                    rdfs:comment "The date that this organization was dissolved." ;
+                                    rdfs:label "dissolution date" .
+
+
+###  http://schema.org/duns
+<http://schema.org/duns> rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf <http://schema.org/identifier> ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain <http://schema.org/Organization> ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The Dun &amp; Bradstreet DUNS number for identifying an organization or business person." ;
+                         rdfs:label "duns" .
+
+
+###  http://schema.org/duration
+<http://schema.org/duration> rdf:type owl:DatatypeProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Event>
+                                                         <http://schema.org/Movie>
+                                                         <http://schema.org/MusicRelease>
+                                                       )
+                                         ] ;
+                             rdfs:range xsd:duration ;
+                             rdfs:comment "The duration of the item (movie, audio recording, event, etc.) in <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 date format</a>." ;
+                             rdfs:label "duration" .
+
+
+###  http://schema.org/encodingFormat
+<http://schema.org/encodingFormat> rdf:type owl:DatatypeProperty ,
+                                            owl:FunctionalProperty ;
+                                   rdfs:domain <http://schema.org/CreativeWork> ;
+                                   rdfs:range xsd:string ;
+                                   rdfs:comment """Media type typically expressed using a MIME format (see <a href=\"http://www.iana.org/assignments/media-types/media-types.xhtml\">IANA site</a> and <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types\">MDN reference</a>) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.).<br/><br/>
+
+In cases where a <a class=\"localLink\" href=\"http://schema.org/CreativeWork\">CreativeWork</a> has several media type representations, <a class=\"localLink\" href=\"http://schema.org/encoding\">encoding</a> can be used to indicate each <a class=\"localLink\" href=\"http://schema.org/MediaObject\">MediaObject</a> alongside particular <a class=\"localLink\" href=\"http://schema.org/encodingFormat\">encodingFormat</a> information.<br/><br/>
+
+Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.""" ;
+                                   rdfs:label "encoding format" .
+
+
+###  http://schema.org/endDate
+<http://schema.org/endDate> rdf:type owl:DatatypeProperty ,
+                                     owl:FunctionalProperty ;
+                            rdfs:domain <http://schema.org/Event> ;
+                            rdfs:range [ rdf:type rdfs:Datatype ;
+                                         owl:unionOf ( xsd:date
+                                                       xsd:dateTime
+                                                       xsd:gYear
+                                                       xsd:gYearMonth
+                                                     )
+                                       ] ;
+                            rdfs:comment "The end date and time of the item (in <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 date format</a>)." ;
+                            rdfs:label "end date" .
+
+
+###  http://schema.org/faxNumber
+<http://schema.org/faxNumber> rdf:type owl:DatatypeProperty ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( <http://schema.org/Organization>
+                                                          <http://schema.org/Person>
+                                                          <http://schema.org/Place>
+                                                        )
+                                          ] ;
+                              rdfs:range xsd:string ;
+                              rdfs:comment "The fax number." ;
+                              rdfs:label "fax number" .
+
+
+###  http://schema.org/foundingDate
+<http://schema.org/foundingDate> rdf:type owl:DatatypeProperty ,
+                                          owl:FunctionalProperty ;
+                                 rdfs:domain <http://schema.org/Organization> ;
+                                 rdfs:range [ rdf:type rdfs:Datatype ;
+                                              owl:unionOf ( xsd:date
+                                                            xsd:dateTime
+                                                            xsd:gYear
+                                                            xsd:gYearMonth
+                                                          )
+                                            ] ;
+                                 rdfs:comment "The date that this organization was founded." ;
+                                 rdfs:label "founding date" .
+
+
+###  http://schema.org/gtin
+<http://schema.org/gtin> rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf <http://schema.org/identifier> ;
+                         rdfs:domain <http://schema.org/Product> ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "A Global Trade Item Number (<a href=\"https://www.gs1.org/standards/id-keys/gtin\">GTIN</a>). GTINs identify trade items, including products and services, using numeric identification codes. The <a class=\"localLink\" href=\"http://schema.org/gtin\">gtin</a> property generalizes the earlier <a class=\"localLink\" href=\"http://schema.org/gtin8\">gtin8</a>, <a class=\"localLink\" href=\"http://schema.org/gtin12\">gtin12</a>, <a class=\"localLink\" href=\"http://schema.org/gtin13\">gtin13</a>, and <a class=\"localLink\" href=\"http://schema.org/gtin14\">gtin14</a> properties. The GS1 <a href=\"https://www.gs1.org/standards/Digital-Link/\">digital link specifications</a> express GTINs as URLs. A correct <a class=\"localLink\" href=\"http://schema.org/gtin\">gtin</a> value should be a valid GTIN, which means that it should be an all-numeric string of either 8, 12, 13 or 14 digits, or a \"GS1 Digital Link\" URL based on such a string. The numeric component should also have a <a href=\"https://www.gs1.org/services/check-digit-calculator\">valid GS1 check digit</a> and meet the other rules for valid GTINs. See also <a href=\"http://www.gs1.org/barcodes/technical/idkeys/gtin\">GS1's GTIN Summary</a> and <a href=\"https://en.wikipedia.org/wiki/Global_Trade_Item_Number\">Wikipedia</a> for more details. Left-padding of the gtin values is not required or encouraged." ;
+                         rdfs:label "gtin" .
+
+
+###  http://schema.org/iataCode
+<http://schema.org/iataCode> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Airline>
+                                                         <http://schema.org/Airport>
+                                                         <http://schema.org/City>
+                                                       )
+                                         ] ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "IATA identifier for an airline or airport." ;
+                             rdfs:label "iata code" .
+
+
+###  http://schema.org/icaoCode
+<http://schema.org/icaoCode> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( <http://schema.org/Airline>
+                                                         <http://schema.org/Airport>
+                                                       )
+                                         ] ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "ICAO identifier for an airport." ;
+                             rdfs:label "icao code" .
+
+
+###  http://schema.org/identifier
+<http://schema.org/identifier> rdf:type owl:DatatypeProperty .
+
+
+###  http://schema.org/isbn
+<http://schema.org/isbn> rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf <http://schema.org/identifier> ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain <http://schema.org/Book> ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The ISBN of the book." ;
+                         rdfs:label "isbn" .
+
+
+###  http://schema.org/issn
+<http://schema.org/issn> rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf <http://schema.org/identifier> ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain <http://schema.org/CreativeWorkSeries> ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The International Standard Serial Number (ISSN) that identifies this serial publication. You can repeat this property to identify different formats of, or the linking ISSN (ISSN-L) for, this serial publication." ;
+                         rdfs:label "issn" .
+
+
+###  http://schema.org/issueNumber
+<http://schema.org/issueNumber> rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf <http://schema.org/position> ;
+                                rdfs:domain <http://schema.org/PublicationIssue> ;
+                                rdfs:range xsd:string ;
+                                rdfs:comment "Identifies the issue of publication; for example, \"iii\" or \"2\"." ;
+                                rdfs:label "issue number" .
+
+
+###  http://schema.org/iswcCode
+<http://schema.org/iswcCode> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/MusicComposition> ;
+                             rdfs:range xsd:string ;
+                             rdfs:comment "The International Standard Musical Work Code for the composition." ;
+                             rdfs:label "iswc code" .
+
+
+###  http://schema.org/latitude
+<http://schema.org/latitude> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/GeoCoordinates> ;
+                             rdfs:range xsd:double ;
+                             rdfs:comment "The latitude of a location. For example <code>37.42242</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+                             rdfs:label "latitude" .
+
+
+###  http://schema.org/leiCode
+<http://schema.org/leiCode> rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf <http://schema.org/identifier> ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain <http://schema.org/Organization> ;
+                            rdfs:range xsd:string ;
+                            rdfs:comment "An organization identifier that uniquely identifies a legal entity as defined in ISO 17442." ;
+                            rdfs:label "lei code" .
+
+
+###  http://schema.org/longitude
+<http://schema.org/longitude> rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <http://schema.org/GeoCoordinates> ;
+                              rdfs:range xsd:double ;
+                              rdfs:comment "The longitude of a location. For example <code>-122.08585</code> (<a href=\"https://en.wikipedia.org/wiki/World_Geodetic_System\">WGS 84</a>)." ;
+                              rdfs:label "longitude" .
+
+
+###  http://schema.org/maxValue
+<http://schema.org/maxValue> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/QuantitativeValue> ;
+                             rdfs:range xsd:decimal ;
+                             rdfs:comment "The upper value of some characteristic or property." ;
+                             rdfs:label "max value" .
+
+
+###  http://schema.org/minValue
+<http://schema.org/minValue> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/QuantitativeValue> ;
+                             rdfs:range xsd:decimal ;
+                             rdfs:comment "The lower value of some characteristic or property." ;
+                             rdfs:label "min value" .
+
+
+###  http://schema.org/numberOfEpisodes
+<http://schema.org/numberOfEpisodes> rdf:type owl:DatatypeProperty ,
+                                              owl:FunctionalProperty ;
+                                     rdfs:domain [ rdf:type owl:Class ;
+                                                   owl:unionOf ( <http://schema.org/CreativeWorkSeason>
+                                                                 <http://schema.org/RadioSeries>
+                                                                 <http://schema.org/TVSeries>
+                                                                 <http://schema.org/VideoGameSeries>
+                                                               )
+                                                 ] ;
+                                     rdfs:range xsd:integer ;
+                                     rdfs:comment "The number of episodes in this season or series." ;
+                                     rdfs:label "number of episodes" .
+
+
+###  http://schema.org/numberOfPages
+<http://schema.org/numberOfPages> rdf:type owl:DatatypeProperty ,
+                                           owl:FunctionalProperty ;
+                                  rdfs:domain <http://schema.org/Book> ;
+                                  rdfs:range xsd:integer ;
+                                  rdfs:comment "The number of pages in the book." ;
+                                  rdfs:label "number of pages" .
+
+
+###  http://schema.org/numberOfSeasons
+<http://schema.org/numberOfSeasons> rdf:type owl:DatatypeProperty ,
+                                             owl:FunctionalProperty ;
+                                    rdfs:domain [ rdf:type owl:Class ;
+                                                  owl:unionOf ( <http://schema.org/RadioSeries>
+                                                                <http://schema.org/TVSeries>
+                                                                <http://schema.org/VideoGameSeries>
+                                                              )
+                                                ] ;
+                                    rdfs:range xsd:integer ;
+                                    rdfs:comment "The number of seasons in this series." ;
+                                    rdfs:label "number of seasons" .
+
+
+###  http://schema.org/pagination
+<http://schema.org/pagination> rdf:type owl:DatatypeProperty ;
+                               rdfs:domain [ rdf:type owl:Class ;
+                                             owl:unionOf ( <http://schema.org/Article>
+                                                           <http://schema.org/PublicationIssue>
+                                                           <http://schema.org/PublicationVolume>
+                                                         )
+                                           ] ;
+                               rdfs:range xsd:string ;
+                               rdfs:comment "Any description of pages that is not separated into pageStart and pageEnd; for example, \"1-6, 9, 55\" or \"10-12, 46-49\"." ;
+                               rdfs:label "pagination" .
+
+
+###  http://schema.org/position
+<http://schema.org/position> rdf:type owl:DatatypeProperty ,
+                                      owl:FunctionalProperty ;
+                             rdfs:domain <http://schema.org/CreativeWork> ;
+                             rdfs:range xsd:integer ;
+                             rdfs:comment "The position of an item in a series or sequence of items." ;
+                             rdfs:label "position" .
+
+
+###  http://schema.org/sameAs
+<http://schema.org/sameAs> rdf:type owl:DatatypeProperty ;
+                           rdfs:domain <http://schema.org/Thing> ;
+                           rdfs:range xsd:anyURI ;
+                           rdfs:comment "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website." ;
+                           rdfs:label "same as" .
+
+
+###  http://schema.org/startDate
+<http://schema.org/startDate> rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain <http://schema.org/Event> ;
+                              rdfs:range [ rdf:type rdfs:Datatype ;
+                                           owl:unionOf ( xsd:date
+                                                         xsd:dateTime
+                                                         xsd:gYear
+                                                         xsd:gYearMonth
+                                                       )
+                                         ] ;
+                              rdfs:comment "The start date and time of the item (in <a href=\"http://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 date format</a>)." ;
+                              rdfs:label "start date" .
+
+
+###  http://schema.org/telephone
+<http://schema.org/telephone> rdf:type owl:DatatypeProperty ;
+                              rdfs:domain [ rdf:type owl:Class ;
+                                            owl:unionOf ( <http://schema.org/Organization>
+                                                          <http://schema.org/Person>
+                                                          <http://schema.org/Place>
+                                                        )
+                                          ] ;
+                              rdfs:range xsd:string ;
+                              rdfs:comment "The telephone number." ;
+                              rdfs:label "telephone" .
+
+
+###  http://schema.org/url
+<http://schema.org/url> rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain <http://schema.org/Thing> ;
+                        rdfs:range xsd:anyURI ;
+                        rdfs:comment "URL of the item." ;
+                        rdfs:label "url" .
+
+
+###  http://schema.org/value
+<http://schema.org/value> rdf:type owl:DatatypeProperty ,
+                                   owl:FunctionalProperty ;
+                          rdfs:domain <http://schema.org/QuantitativeValue> ;
+                          rdfs:range xsd:decimal ;
+                          rdfs:comment """The value of the quantitative value or property value node.<br/><br/>
+
+<ul>
+<li>For <a class=\"localLink\" href=\"http://schema.org/QuantitativeValue\">QuantitativeValue</a> and <a class=\"localLink\" href=\"http://schema.org/MonetaryAmount\">MonetaryAmount</a>, the recommended type for values is 'Number'.</li>
+<li>For <a class=\"localLink\" href=\"http://schema.org/PropertyValue\">PropertyValue</a>, it can be 'Text;', 'Number', 'Boolean', or 'StructuredValue'.</li>
+<li>Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially similiar Unicode symbols.</li>
+<li>Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a decimal point. Avoid using these symbols as a readability separator.</li>
+</ul>
+""" ;
+                          rdfs:label "value" .
+
+
+###  http://schema.org/volumeNumber
+<http://schema.org/volumeNumber> rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf <http://schema.org/position> ;
+                                 rdfs:domain <http://schema.org/PublicationVolume> ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "Identifies the volume of publication or multi-part work; for example, \"iii\" or \"2\"." ;
+                                 rdfs:label "volume number" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://bioschemas.org/BioChemEntity
+<http://bioschemas.org/BioChemEntity> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/Thing> ;
+                                      rdfs:comment "Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical."@en ;
+                                      rdfs:label "biology chemistry entity"@en .
+
+
+###  http://bioschemas.org/ChemicalSubstance
+<http://bioschemas.org/ChemicalSubstance> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://bioschemas.org/BioChemEntity> ;
+                                          rdfs:comment "A chemical substance."@en ;
+                                          rdfs:label "chemical substance"@en .
+
+
+###  http://bioschemas.org/Gene
+<http://bioschemas.org/Gene> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://bioschemas.org/BioChemEntity> ;
+                             rdfs:comment "A discrete unit of inheritance which affects one or more biological traits ."@en ;
+                             rdfs:label "gene"@en .
+
+
+###  http://bioschemas.org/MolecularEntity
+<http://bioschemas.org/MolecularEntity> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://bioschemas.org/BioChemEntity> ;
+                                        rdfs:comment "Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity."@en ;
+                                        rdfs:label "molecular entity"@en .
+
+
+###  http://bioschemas.org/Protein
+<http://bioschemas.org/Protein> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://bioschemas.org/BioChemEntity> ;
+                                rdfs:comment "Protein is here used in its widest possible definition, as classes of amino acid based molecules. Amyloid-beta Protein in human (UniProt P05067), eukaryota (e.g. an OrthoDB group) or even a single molecule that one can point to are all of type schema:Protein. A protein can thus be a subclass of another protein, e.g. schema:Protein as a UniProt record can have multiple isoforms inside it which would also be schema:Protein. They can be imagined, synthetic, hypothetical or naturally occurring."@en ;
+                                rdfs:label "protein"@en .
+
+
+###  http://bioschemas.org/Taxon
+<http://bioschemas.org/Taxon> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Thing> ;
+                              rdfs:comment "A set of organisms asserted to represent a natural cohesive biological unit."@en ;
+                              rdfs:label "taxon"@en .
+
+
+###  http://schema.org/Accommodation
+<http://schema.org/Accommodation> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/Place> ;
+                                  rdfs:comment """An accommodation is a place that can accommodate human beings, e.g. a hotel room, a camping pitch, or a meeting room. Many accommodations are for overnight stays, but this is not a mandatory requirement.
+For more specific types of accommodations not defined in schema.org, one can use additionalType with external vocabularies.
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                                  rdfs:label "accommodation" .
+
+
+###  http://schema.org/AdministrativeArea
+<http://schema.org/AdministrativeArea> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/Place> ;
+                                       rdfs:comment "A geographical region, typically under the jurisdiction of a particular government." ;
+                                       rdfs:label "administrative area" .
+
+
+###  http://schema.org/Airline
+<http://schema.org/Airline> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Organization> ;
+                            rdfs:comment "An organization that provides flights for passengers." ;
+                            rdfs:label "airline" .
+
+
+###  http://schema.org/Airport
+<http://schema.org/Airport> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                            rdfs:comment "An airport." ;
+                            rdfs:label "airport" .
+
+
+###  http://schema.org/AmusementPark
+<http://schema.org/AmusementPark> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/EntertainmentBusiness> ;
+                                  rdfs:comment "An amusement park." ;
+                                  rdfs:label "amusement park" .
+
+
+###  http://schema.org/AnatomicalStructure
+<http://schema.org/AnatomicalStructure> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                        rdfs:comment "Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures." ;
+                                        rdfs:label "anatomical structure" .
+
+
+###  http://schema.org/AnimalShelter
+<http://schema.org/AnimalShelter> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                  rdfs:comment "Animal shelter." ;
+                                  rdfs:label "animal shelter" .
+
+
+###  http://schema.org/Apartment
+<http://schema.org/Apartment> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Accommodation> ;
+                              rdfs:comment "An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/Apartment\">http://en.wikipedia.org/wiki/Apartment</a>)." ;
+                              rdfs:label "apartment" .
+
+
+###  http://schema.org/Aquarium
+<http://schema.org/Aquarium> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                             rdfs:comment "Aquarium." ;
+                             rdfs:label "aquarium" .
+
+
+###  http://schema.org/ArchiveOrganization
+<http://schema.org/ArchiveOrganization> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                        rdfs:comment "An organization with archival holdings. An organization which keeps and preserves archival material and typically makes it accessible to the public." ;
+                                        rdfs:label "archive organization"@en .
+
+
+###  http://schema.org/ArtGallery
+<http://schema.org/ArtGallery> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/EntertainmentBusiness> ;
+                               rdfs:comment "An art gallery." ;
+                               rdfs:label "art gallery" .
+
+
+###  http://schema.org/Artery
+<http://schema.org/Artery> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Vessel> ;
+                           rdfs:comment "A type of blood vessel that specifically carries blood away from the heart." ;
+                           rdfs:label "artery" .
+
+
+###  http://schema.org/Article
+<http://schema.org/Article> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment """An article, such as a news article or piece of investigative report. Newspapers and magazines have articles of many different types and this is intended to cover them all.<br/><br/>
+
+See also <a href=\"http://blog.schema.org/2014/09/schemaorg-support-for-bibliographic_2.html\">blog post</a>.""" ;
+                            rdfs:label "article" .
+
+
+###  http://schema.org/Atlas
+<http://schema.org/Atlas> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                          rdfs:comment "A collection or bound volume of maps, charts, plates or tables, physical or in media form illustrating any subject." ;
+                          rdfs:label "atlas"@en .
+
+
+###  http://schema.org/AudioObject
+<http://schema.org/AudioObject> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/MediaObject> ;
+                                rdfs:comment "An audio file." ;
+                                rdfs:label "audio object" .
+
+
+###  http://schema.org/AutoRental
+<http://schema.org/AutoRental> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/AutomotiveBusiness> ;
+                               rdfs:comment "A car rental business." ;
+                               rdfs:label "auto rental" .
+
+
+###  http://schema.org/AutomotiveBusiness
+<http://schema.org/AutomotiveBusiness> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                       rdfs:comment "Car repair, sales, or parts." ;
+                                       rdfs:label "automotive business" .
+
+
+###  http://schema.org/Bakery
+<http://schema.org/Bakery> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                           rdfs:comment "A bakery." ;
+                           rdfs:label "bakery" .
+
+
+###  http://schema.org/BankOrCreditUnion
+<http://schema.org/BankOrCreditUnion> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/FinancialService> ;
+                                      rdfs:comment "Bank or credit union." ;
+                                      rdfs:label "bank or credit union" .
+
+
+###  http://schema.org/BarOrPub
+<http://schema.org/BarOrPub> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                             rdfs:comment "A bar or pub." ;
+                             rdfs:label "bar or pub" .
+
+
+###  http://schema.org/Beach
+<http://schema.org/Beach> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                          rdfs:comment "Beach." ;
+                          rdfs:label "beach" .
+
+
+###  http://schema.org/BeautySalon
+<http://schema.org/BeautySalon> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/HealthAndBeautyBusiness> ;
+                                rdfs:comment "Beauty salon." ;
+                                rdfs:label "beauty salon" .
+
+
+###  http://schema.org/BedAndBreakfast
+<http://schema.org/BedAndBreakfast> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/LodgingBusiness> ;
+                                    rdfs:comment """Bed and breakfast.
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                                    rdfs:label "bed and breakfast" .
+
+
+###  http://schema.org/Blog
+<http://schema.org/Blog> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                         rdfs:comment "A blog." ;
+                         rdfs:label "blog" .
+
+
+###  http://schema.org/BlogPosting
+<http://schema.org/BlogPosting> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/SocialMediaPosting> ;
+                                rdfs:comment "A blog post." ;
+                                rdfs:label "blog posting" .
+
+
+###  http://schema.org/BloodTest
+<http://schema.org/BloodTest> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/MedicalTest> ;
+                              rdfs:comment "A medical test performed on a sample of a patient's blood." ;
+                              rdfs:label "blood test" .
+
+
+###  http://schema.org/BodyOfWater
+<http://schema.org/BodyOfWater> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Landform> ;
+                                rdfs:comment "A body of water, such as a sea, ocean, or lake." ;
+                                rdfs:label "body of water" .
+
+
+###  http://schema.org/Bone
+<http://schema.org/Bone> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/AnatomicalStructure> ;
+                         rdfs:comment "Rigid connective tissue that comprises up the skeletal structure of the human body." ;
+                         rdfs:label "bone" .
+
+
+###  http://schema.org/Book
+<http://schema.org/Book> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                         rdfs:comment "A book." ;
+                         rdfs:label "book" .
+
+
+###  http://schema.org/BookSeries
+<http://schema.org/BookSeries> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                               rdfs:comment "A series of books. Included books can be indicated with the hasPart property." ;
+                               rdfs:label "book series" .
+
+
+###  http://schema.org/BookStore
+<http://schema.org/BookStore> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Store> ;
+                              rdfs:comment "A bookstore." ;
+                              rdfs:label "book store" .
+
+
+###  http://schema.org/BowlingAlley
+<http://schema.org/BowlingAlley> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/SportsActivityLocation> ;
+                                 rdfs:comment "A bowling alley." ;
+                                 rdfs:label "bowling alley" .
+
+
+###  http://schema.org/Brand
+<http://schema.org/Brand> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Thing> ;
+                          rdfs:comment "A brand is a name used by an organization or business person for labeling a product, product group, or similar." ;
+                          rdfs:label "brand" .
+
+
+###  http://schema.org/Brewery
+<http://schema.org/Brewery> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                            rdfs:comment "Brewery." ;
+                            rdfs:label "brewery" .
+
+
+###  http://schema.org/Bridge
+<http://schema.org/Bridge> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                           rdfs:comment "A bridge." ;
+                           rdfs:label "bridge" .
+
+
+###  http://schema.org/BroadcastChannel
+<http://schema.org/BroadcastChannel> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/Thing> ;
+                                     rdfs:comment "A unique instance of a BroadcastService on a CableOrSatelliteService lineup." ;
+                                     rdfs:label "broadcast channel" .
+
+
+###  http://schema.org/BroadcastService
+<http://schema.org/BroadcastService> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/Service> ;
+                                     rdfs:comment "A delivery service through which content is provided via broadcast over the air or online." ;
+                                     rdfs:label "broadcast service" .
+
+
+###  http://schema.org/BuddhistTemple
+<http://schema.org/BuddhistTemple> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/PlaceOfWorship> ;
+                                   rdfs:comment "A Buddhist temple." ;
+                                   rdfs:label "buddhist temple" .
+
+
+###  http://schema.org/BusOrCoach
+<http://schema.org/BusOrCoach> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/Vehicle> ;
+                               rdfs:comment "A bus (also omnibus or autobus) is a road vehicle designed to carry passengers. Coaches are luxury busses, usually in service for long distance travel." ;
+                               rdfs:label "bus or coach" .
+
+
+###  http://schema.org/BusStation
+<http://schema.org/BusStation> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                               rdfs:comment "A bus station." ;
+                               rdfs:label "bus station" .
+
+
+###  http://schema.org/BusStop
+<http://schema.org/BusStop> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                            rdfs:comment "A bus stop." ;
+                            rdfs:label "bus stop" .
+
+
+###  http://schema.org/CafeOrCoffeeShop
+<http://schema.org/CafeOrCoffeeShop> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                                     rdfs:comment "A cafe or coffee shop." ;
+                                     rdfs:label "cafe or coffee shop" .
+
+
+###  http://schema.org/Campground
+<http://schema.org/Campground> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                               <http://schema.org/LodgingBusiness> ;
+                               rdfs:comment """A camping site, campsite, or <a class=\"localLink\" href=\"http://schema.org/Campground\">Campground</a> is a place used for overnight stay in the outdoors, typically containing individual <a class=\"localLink\" href=\"http://schema.org/CampingPitch\">CampingPitch</a> locations. <br/><br/>
+
+In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or park a camper; a campground may contain many campsites (Source: Wikipedia see <a href=\"https://en.wikipedia.org/wiki/Campsite\">https://en.wikipedia.org/wiki/Campsite</a>).<br/><br/>
+
+See also the dedicated <a href=\"/docs/hotels.html\">document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                               rdfs:label "campground" .
+
+
+###  http://schema.org/Canal
+<http://schema.org/Canal> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                          rdfs:comment "A canal, like the Panama Canal." ;
+                          rdfs:label "canal" .
+
+
+###  http://schema.org/Car
+<http://schema.org/Car> rdf:type owl:Class ;
+                        rdfs:subClassOf <http://schema.org/Vehicle> ;
+                        rdfs:comment "A car is a wheeled, self-powered motor vehicle used for transportation." ;
+                        rdfs:label "car" .
+
+
+###  http://schema.org/Casino
+<http://schema.org/Casino> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/EntertainmentBusiness> ;
+                           rdfs:comment "A casino." ;
+                           rdfs:label "casino" .
+
+
+###  http://schema.org/CatholicChurch
+<http://schema.org/CatholicChurch> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/Church> ;
+                                   rdfs:comment "A Catholic church." ;
+                                   rdfs:label "catholic church" .
+
+
+###  http://schema.org/Cemetery
+<http://schema.org/Cemetery> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                             rdfs:comment "A graveyard." ;
+                             rdfs:label "cemetery" .
+
+
+###  http://schema.org/Chapter
+<http://schema.org/Chapter> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "One of the sections into which a book is divided. A chapter usually has a section number or a name." ;
+                            rdfs:label "chapter"@en .
+
+
+###  http://schema.org/ChildCare
+<http://schema.org/ChildCare> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                              rdfs:comment "A Childcare center." ;
+                              rdfs:label "child care" .
+
+
+###  http://schema.org/Church
+<http://schema.org/Church> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/PlaceOfWorship> ;
+                           rdfs:comment "A church." ;
+                           rdfs:label "church" .
+
+
+###  http://schema.org/City
+<http://schema.org/City> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/AdministrativeArea> ;
+                         rdfs:comment "A city or town." ;
+                         rdfs:label "city" .
+
+
+###  http://schema.org/CityHall
+<http://schema.org/CityHall> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/GovernmentBuilding> ;
+                             rdfs:comment "A city hall." ;
+                             rdfs:label "city hall" .
+
+
+###  http://schema.org/CivicStructure
+<http://schema.org/CivicStructure> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/Place> ;
+                                   rdfs:comment "A public structure, such as a town hall or concert hall." ;
+                                   rdfs:label "civic structure" .
+
+
+###  http://schema.org/Collection
+<http://schema.org/Collection> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                               rdfs:comment "A created collection of Creative Works or other artefacts." ;
+                               rdfs:label "collection"@en .
+
+
+###  http://schema.org/CollegeOrUniversity
+<http://schema.org/CollegeOrUniversity> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/EducationalOrganization> ;
+                                        rdfs:comment "A college, university, or other third-level educational institution." ;
+                                        rdfs:label "college or university" .
+
+
+###  http://schema.org/ComedyClub
+<http://schema.org/ComedyClub> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/EntertainmentBusiness> ;
+                               rdfs:comment "A comedy club." ;
+                               rdfs:label "comedy club" .
+
+
+###  http://schema.org/ComicSeries
+<http://schema.org/ComicSeries> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Periodical> ;
+                                rdfs:comment """A sequential publication of comic stories under a
+    unifying title, for example \"The Amazing Spider-Man\" or \"Groo the
+    Wanderer\".""" ;
+                                rdfs:label "comic series"@en .
+
+
+###  http://schema.org/ComicStory
+<http://schema.org/ComicStory> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                               rdfs:comment """The term \"story\" is any indivisible, re-printable
+    unit of a comic, including the interior stories, covers, and backmatter. Most
+    comics have at least two stories: a cover (ComicCoverArt) and an interior story.""" ;
+                               rdfs:label "comic story"@en .
+
+
+###  http://schema.org/ComputerLanguage
+<http://schema.org/ComputerLanguage> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/Thing> ;
+                                     rdfs:comment "This type covers computer programming languages such as Scheme and Lisp, as well as other language-like computer representations. Natural languages are best represented with the <a class=\"localLink\" href=\"http://schema.org/Language\">Language</a> type." ;
+                                     rdfs:label "computer language" .
+
+
+###  http://schema.org/Continent
+<http://schema.org/Continent> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Landform> ;
+                              rdfs:comment "One of the continents (for example, Europe or Africa)." ;
+                              rdfs:label "continent" .
+
+
+###  http://schema.org/Corporation
+<http://schema.org/Corporation> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Organization> ;
+                                rdfs:comment "Organization: A business corporation." ;
+                                rdfs:label "corporation" .
+
+
+###  http://schema.org/Country
+<http://schema.org/Country> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/AdministrativeArea> ;
+                            rdfs:comment "A country." ;
+                            rdfs:label "country" .
+
+
+###  http://schema.org/Course
+<http://schema.org/Course> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                           rdfs:comment "A description of an educational course which may be offered as distinct instances at which take place at different times or take place at different locations, or be offered through different media or modes of study. An educational course is a sequence of one or more educational events and/or creative works which aims to build knowledge, competence or ability of learners." ;
+                           rdfs:label "course" .
+
+
+###  http://schema.org/Courthouse
+<http://schema.org/Courthouse> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/GovernmentBuilding> ;
+                               rdfs:comment "A courthouse." ;
+                               rdfs:label "courthouse" .
+
+
+###  http://schema.org/CreativeWork
+<http://schema.org/CreativeWork> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Thing> ;
+                                 owl:disjointWith <http://schema.org/Event> ,
+                                                  <http://schema.org/Organization> ,
+                                                  <http://schema.org/Person> ,
+                                                  <http://schema.org/Place> ;
+                                 rdfs:comment "The most generic kind of creative work, including books, movies, photographs, software programs, etc." ;
+                                 rdfs:label "creative work" .
+
+
+###  http://schema.org/CreativeWorkSeason
+<http://schema.org/CreativeWorkSeason> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                       rdfs:comment "A media season e.g. tv, radio, video game etc." ;
+                                       rdfs:label "creative work season" .
+
+
+###  http://schema.org/CreativeWorkSeries
+<http://schema.org/CreativeWorkSeries> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                       rdfs:comment """A CreativeWorkSeries in schema.org is a group of related items, typically but not necessarily of the same kind. CreativeWorkSeries are usually organized into some order, often chronological. Unlike <a class=\"localLink\" href=\"http://schema.org/ItemList\">ItemList</a> which is a general purpose data structure for lists of things, the emphasis with CreativeWorkSeries is on published materials (written e.g. books and periodicals, or media such as tv, radio and games).<br/><br/>
+
+Specific subtypes are available for describing <a class=\"localLink\" href=\"http://schema.org/TVSeries\">TVSeries</a>, <a class=\"localLink\" href=\"http://schema.org/RadioSeries\">RadioSeries</a>, <a class=\"localLink\" href=\"http://schema.org/MovieSeries\">MovieSeries</a>, <a class=\"localLink\" href=\"http://schema.org/BookSeries\">BookSeries</a>, <a class=\"localLink\" href=\"http://schema.org/Periodical\">Periodical</a> and <a class=\"localLink\" href=\"http://schema.org/VideoGameSeries\">VideoGameSeries</a>. In each case, the <a class=\"localLink\" href=\"http://schema.org/hasPart\">hasPart</a> / <a class=\"localLink\" href=\"http://schema.org/isPartOf\">isPartOf</a> properties can be used to relate the CreativeWorkSeries to its parts. The general CreativeWorkSeries type serves largely just to organize these more specific and practical subtypes.<br/><br/>
+
+It is common for properties applicable to an item from the series to be usefully applied to the containing group. Schema.org attempts to anticipate some of these cases, but publishers should be free to apply properties of the series parts to the series as a whole wherever they seem appropriate.""" ;
+                                       rdfs:label "creative work series" .
+
+
+###  http://schema.org/Crematorium
+<http://schema.org/Crematorium> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                rdfs:comment "A crematorium." ;
+                                rdfs:label "crematorium" .
+
+
+###  http://schema.org/DanceGroup
+<http://schema.org/DanceGroup> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/PerformingGroup> ;
+                               rdfs:comment "A dance group&#x2014;for example, the Alvin Ailey Dance Theater or Riverdance." ;
+                               rdfs:label "dance group" .
+
+
+###  http://schema.org/DataCatalog
+<http://schema.org/DataCatalog> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                rdfs:comment "A collection of datasets." ;
+                                rdfs:label "data catalog" .
+
+
+###  http://schema.org/Dataset
+<http://schema.org/Dataset> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A body of structured information describing some topic(s) of interest." ;
+                            rdfs:label "dataset" .
+
+
+###  http://schema.org/DaySpa
+<http://schema.org/DaySpa> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/HealthAndBeautyBusiness> ;
+                           rdfs:comment "A day spa." ;
+                           rdfs:label "day spa" .
+
+
+###  http://schema.org/DefenceEstablishment
+<http://schema.org/DefenceEstablishment> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://schema.org/GovernmentBuilding> ;
+                                         rdfs:comment "A defence establishment, such as an army or navy base." ;
+                                         rdfs:label "defence establishment" .
+
+
+###  http://schema.org/DiagnosticProcedure
+<http://schema.org/DiagnosticProcedure> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/MedicalProcedure> ;
+                                        rdfs:comment "A medical procedure intended primarily for diagnostic, as opposed to therapeutic, purposes." ;
+                                        rdfs:label "diagnostic procedure" .
+
+
+###  http://schema.org/Distillery
+<http://schema.org/Distillery> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                               rdfs:comment "A distillery." ;
+                               rdfs:label "distillery" .
+
+
+###  http://schema.org/Drawing
+<http://schema.org/Drawing> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A picture or diagram made with a pencil, pen, or crayon rather than paint." ;
+                            rdfs:label "drawing" .
+
+
+###  http://schema.org/Drug
+<http://schema.org/Drug> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/Substance> ;
+                         rdfs:comment "A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge make a clear difference between them." ;
+                         rdfs:label "drug" .
+
+
+###  http://schema.org/DrugLegalStatus
+<http://schema.org/DrugLegalStatus> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                    rdfs:comment "The legal availability status of a medical drug." ;
+                                    rdfs:label "drug legal status" .
+
+
+###  http://schema.org/EducationalOrganization
+<http://schema.org/EducationalOrganization> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://schema.org/Organization> ;
+                                            rdfs:comment "An educational organization." ;
+                                            rdfs:label "educational organization" .
+
+
+###  http://schema.org/ElementarySchool
+<http://schema.org/ElementarySchool> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/EducationalOrganization> ;
+                                     rdfs:comment "An elementary school." ;
+                                     rdfs:label "elementary school" .
+
+
+###  http://schema.org/Embassy
+<http://schema.org/Embassy> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/GovernmentBuilding> ;
+                            rdfs:comment "An embassy." ;
+                            rdfs:label "embassy" .
+
+
+###  http://schema.org/EmergencyService
+<http://schema.org/EmergencyService> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                     rdfs:comment "An emergency service, such as a fire station or ER." ;
+                                     rdfs:label "emergency service" .
+
+
+###  http://schema.org/EmploymentAgency
+<http://schema.org/EmploymentAgency> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                     rdfs:comment "An employment agency." ;
+                                     rdfs:label "employment agency" .
+
+
+###  http://schema.org/EntertainmentBusiness
+<http://schema.org/EntertainmentBusiness> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                          rdfs:comment "A business providing entertainment." ;
+                                          rdfs:label "entertainment business" .
+
+
+###  http://schema.org/Episode
+<http://schema.org/Episode> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A media episode (e.g. TV, radio, video game) which can be part of a series or season." ;
+                            rdfs:label "episode" .
+
+
+###  http://schema.org/Event
+<http://schema.org/Event> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Thing> ;
+                          owl:disjointWith <http://schema.org/Organization> ,
+                                           <http://schema.org/Person> ,
+                                           <http://schema.org/Place> ;
+                          rdfs:comment "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the <a class=\"localLink\" href=\"http://schema.org/offers\">offers</a> property. Repeated events may be structured as separate Event objects." ;
+                          rdfs:label "event" .
+
+
+###  http://schema.org/EventSeries
+<http://schema.org/EventSeries> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Event> ;
+                                rdfs:comment """A series of <a class=\"localLink\" href=\"http://schema.org/Event\">Event</a>s. Included events can relate with the series using the <a class=\"localLink\" href=\"http://schema.org/superEvent\">superEvent</a> property.<br/><br/>
+
+An EventSeries is a collection of events that share some unifying characteristic. For example, \"The Olympic Games\" is a series, which
+is repeated regularly. The \"2012 London Olympics\" can be presented both as an <a class=\"localLink\" href=\"http://schema.org/Event\">Event</a> in the series \"Olympic Games\", and as an
+<a class=\"localLink\" href=\"http://schema.org/EventSeries\">EventSeries</a> that included a number of sporting competitions as Events.<br/><br/>
+
+The nature of the association between the events in an <a class=\"localLink\" href=\"http://schema.org/EventSeries\">EventSeries</a> can vary, but typical examples could
+include a thematic event series (e.g. topical meetups or classes), or a series of regular events that share a location, attendee group and/or organizers.<br/><br/>
+
+EventSeries has been defined as a kind of Event to make it easy for publishers to use it in an Event context without
+worrying about which kinds of series are really event-like enough to call an Event. In general an EventSeries
+may seem more Event-like when the period of time is compact and when aspects such as location are fixed, but
+it may also sometimes prove useful to describe a longer-term series as an Event.""" ;
+                                rdfs:label "event series" .
+
+
+###  http://schema.org/EventVenue
+<http://schema.org/EventVenue> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                               rdfs:comment "An event venue." ;
+                               rdfs:label "event venue" .
+
+
+###  http://schema.org/Festival
+<http://schema.org/Festival> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Event> ;
+                             rdfs:comment "Event type: Festival." ;
+                             rdfs:label "festival" .
+
+
+###  http://schema.org/FinancialProduct
+<http://schema.org/FinancialProduct> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/Service> ;
+                                     rdfs:comment "A product provided to consumers and businesses by financial institutions such as banks, insurance companies, brokerage firms, consumer finance companies, and investment companies which comprise the financial services industry." ;
+                                     rdfs:label "financial product" .
+
+
+###  http://schema.org/FinancialService
+<http://schema.org/FinancialService> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                     rdfs:comment "Financial services business." ;
+                                     rdfs:label "financial service" .
+
+
+###  http://schema.org/FireStation
+<http://schema.org/FireStation> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                                <http://schema.org/EmergencyService> ;
+                                rdfs:comment "A fire station. With firemen." ;
+                                rdfs:label "fire station" .
+
+
+###  http://schema.org/FoodEstablishment
+<http://schema.org/FoodEstablishment> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                      rdfs:comment "A food-related business." ;
+                                      rdfs:label "food establishment" .
+
+
+###  http://schema.org/Game
+<http://schema.org/Game> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                         rdfs:comment "The Game type represents things which are games. These are typically rule-governed recreational activities, e.g. role-playing games in which players assume the role of characters in a fictional setting." ;
+                         rdfs:label "game" .
+
+
+###  http://schema.org/GasStation
+<http://schema.org/GasStation> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/AutomotiveBusiness> ;
+                               rdfs:comment "A gas station." ;
+                               rdfs:label "gas station" .
+
+
+###  http://schema.org/GeoCoordinates
+<http://schema.org/GeoCoordinates> rdf:type owl:Class ;
+                                   rdfs:comment "The geographic coordinates of a place or event." ;
+                                   rdfs:label "geo coordinates" .
+
+
+###  http://schema.org/GolfCourse
+<http://schema.org/GolfCourse> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/SportsActivityLocation> ;
+                               rdfs:comment "A golf course." ;
+                               rdfs:label "golf course" .
+
+
+###  http://schema.org/GovernmentBuilding
+<http://schema.org/GovernmentBuilding> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                       rdfs:comment "A government building." ;
+                                       rdfs:label "government building" .
+
+
+###  http://schema.org/GovernmentOffice
+<http://schema.org/GovernmentOffice> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                     rdfs:comment "A government office&#x2014;for example, an IRS or DMV office." ;
+                                     rdfs:label "government office" .
+
+
+###  http://schema.org/GovernmentOrganization
+<http://schema.org/GovernmentOrganization> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://schema.org/Organization> ;
+                                           rdfs:comment "A governmental organization or agency." ;
+                                           rdfs:label "government organization" .
+
+
+###  http://schema.org/GroceryStore
+<http://schema.org/GroceryStore> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Store> ;
+                                 rdfs:comment "A grocery store." ;
+                                 rdfs:label "grocery store" .
+
+
+###  http://schema.org/HealthAndBeautyBusiness
+<http://schema.org/HealthAndBeautyBusiness> rdf:type owl:Class ;
+                                            rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                            rdfs:comment "Health and beauty." ;
+                                            rdfs:label "health and beauty business" .
+
+
+###  http://schema.org/HealthClub
+<http://schema.org/HealthClub> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/HealthAndBeautyBusiness> ,
+                                               <http://schema.org/SportsActivityLocation> ;
+                               rdfs:comment "A health club." ;
+                               rdfs:label "health club" .
+
+
+###  http://schema.org/HinduTemple
+<http://schema.org/HinduTemple> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/PlaceOfWorship> ;
+                                rdfs:comment "A Hindu temple." ;
+                                rdfs:label "hindu temple" .
+
+
+###  http://schema.org/Hospital
+<http://schema.org/Hospital> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                             <http://schema.org/EmergencyService> ,
+                                             <http://schema.org/MedicalOrganization> ;
+                             rdfs:comment "A hospital." ;
+                             rdfs:label "hospital" .
+
+
+###  http://schema.org/Hostel
+<http://schema.org/Hostel> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/LodgingBusiness> ;
+                           rdfs:comment """A hostel - cheap accommodation, often in shared dormitories.
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                           rdfs:label "hostel" .
+
+
+###  http://schema.org/Hotel
+<http://schema.org/Hotel> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/LodgingBusiness> ;
+                          rdfs:comment """A hotel is an establishment that provides lodging paid on a short-term basis (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Hotel).
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                          rdfs:label "hotel" .
+
+
+###  http://schema.org/House
+<http://schema.org/House> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Accommodation> ;
+                          rdfs:comment "A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/House\">http://en.wikipedia.org/wiki/House</a>)." ;
+                          rdfs:label "house" .
+
+
+###  http://schema.org/IceCreamShop
+<http://schema.org/IceCreamShop> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                                 rdfs:comment "An ice cream shop." ;
+                                 rdfs:label "ice cream shop" .
+
+
+###  http://schema.org/ImageObject
+<http://schema.org/ImageObject> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/MediaObject> ;
+                                rdfs:comment "An image file." ;
+                                rdfs:label "image object" .
+
+
+###  http://schema.org/InfectiousDisease
+<http://schema.org/InfectiousDisease> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/MedicalCondition> ;
+                                      rdfs:comment "An infectious disease is a clinically evident human disease resulting from the presence of pathogenic microbial agents, like pathogenic viruses, pathogenic bacteria, fungi, protozoa, multicellular parasites, and prions. To be considered an infectious disease, such pathogens are known to be able to cause this disease." ;
+                                      rdfs:label "infectious disease" .
+
+
+###  http://schema.org/Joint
+<http://schema.org/Joint> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/AnatomicalStructure> ;
+                          rdfs:comment "The anatomical location at which two or more bones make contact." ;
+                          rdfs:label "joint" .
+
+
+###  http://schema.org/LakeBodyOfWater
+<http://schema.org/LakeBodyOfWater> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                                    rdfs:comment "A lake (for example, Lake Pontrachain)." ;
+                                    rdfs:label "lake body of water" .
+
+
+###  http://schema.org/Landform
+<http://schema.org/Landform> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Place> ;
+                             rdfs:comment "A landform or physical feature.  Landform elements include mountains, plains, lakes, rivers, seascape and oceanic waterbody interface features such as bays, peninsulas, seas and so forth, including sub-aqueous terrain features such as submersed mountain ranges, volcanoes, and the great ocean basins." ;
+                             rdfs:label "landform" .
+
+
+###  http://schema.org/LandmarksOrHistoricalBuildings
+<http://schema.org/LandmarksOrHistoricalBuildings> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://schema.org/Place> ;
+                                                   rdfs:comment "An historical landmark or building." ;
+                                                   rdfs:label "landmarks or historical buildings" .
+
+
+###  http://schema.org/Language
+<http://schema.org/Language> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Thing> ;
+                             rdfs:comment "Natural languages such as Spanish, Tamil, Hindi, English, etc. Formal language code tags expressed in <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> can be used via the <a class=\"localLink\" href=\"http://schema.org/alternateName\">alternateName</a> property. The Language type previously also covered programming languages such as Scheme and Lisp, which are now best represented using <a class=\"localLink\" href=\"http://schema.org/ComputerLanguage\">ComputerLanguage</a>." ;
+                             rdfs:label "language" .
+
+
+###  http://schema.org/Legislation
+<http://schema.org/Legislation> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                rdfs:comment "A legal document such as an act, decree, bill, etc. (enforceable or not) or a component of a legal act (like an article)." ;
+                                rdfs:label "legislation" .
+
+
+###  http://schema.org/Library
+<http://schema.org/Library> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                            rdfs:comment "A library." ;
+                            rdfs:label "library" .
+
+
+###  http://schema.org/Ligament
+<http://schema.org/Ligament> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/AnatomicalStructure> ;
+                             rdfs:comment "A short band of tough, flexible, fibrous connective tissue that functions to connect multiple bones, cartilages, and structurally support joints." ;
+                             rdfs:label "ligament" .
+
+
+###  http://schema.org/LiquorStore
+<http://schema.org/LiquorStore> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Store> ;
+                                rdfs:comment "A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits." ;
+                                rdfs:label "liquor store" .
+
+
+###  http://schema.org/LocalBusiness
+<http://schema.org/LocalBusiness> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/Organization> ,
+                                                  <http://schema.org/Place> ;
+                                  rdfs:comment "A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc." ;
+                                  rdfs:label "local business" .
+
+
+###  http://schema.org/LodgingBusiness
+<http://schema.org/LodgingBusiness> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                    rdfs:comment "A lodging business, such as a motel, hotel, or inn." ;
+                                    rdfs:label "lodging business" .
+
+
+###  http://schema.org/Manuscript
+<http://schema.org/Manuscript> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                               rdfs:comment "A book, document, or piece of music written by hand rather than typed or printed." ;
+                               rdfs:label "manuscript" .
+
+
+###  http://schema.org/Map
+<http://schema.org/Map> rdf:type owl:Class ;
+                        rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                        rdfs:comment "A map." ;
+                        rdfs:label "map" .
+
+
+###  http://schema.org/MediaObject
+<http://schema.org/MediaObject> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                rdfs:comment "A media object, such as an image, video, or audio object embedded in a web page or a downloadable dataset i.e. DataDownload. Note that a creative work may have many media objects associated with it on the same web page. For example, a page about a single song (MusicRecording) may have a music video (VideoObject), and a high and low bandwidth audio stream (2 AudioObject's)." ;
+                                rdfs:label "media object" .
+
+
+###  http://schema.org/MedicalBusiness
+<http://schema.org/MedicalBusiness> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                    rdfs:comment "A particular physical or virtual business of an organization for medical purposes. Examples of MedicalBusiness include differents business run by health professionals." ;
+                                    rdfs:label "medical business" .
+
+
+###  http://schema.org/MedicalClinic
+<http://schema.org/MedicalClinic> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/MedicalBusiness> ,
+                                                  <http://schema.org/MedicalOrganization> ;
+                                  rdfs:comment "A facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well." ;
+                                  rdfs:label "medical clinic" .
+
+
+###  http://schema.org/MedicalCondition
+<http://schema.org/MedicalCondition> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                     rdfs:comment "Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc." ;
+                                     rdfs:label "medical condition" .
+
+
+###  http://schema.org/MedicalDevice
+<http://schema.org/MedicalDevice> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                  rdfs:comment "Any object used in a medical capacity, such as to diagnose or treat a patient." ;
+                                  rdfs:label "medical device" .
+
+
+###  http://schema.org/MedicalEntity
+<http://schema.org/MedicalEntity> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/Thing> ;
+                                  rdfs:comment "The most generic type of entity related to health and the practice of medicine." ;
+                                  rdfs:label "medical entity" .
+
+
+###  http://schema.org/MedicalGuideline
+<http://schema.org/MedicalGuideline> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                     rdfs:comment "Any recommendation made by a standard society (e.g. ACC/AHA) or consensus statement that denotes how to diagnose and treat a particular condition. Note: this type should be used to tag the actual guideline recommendation; if the guideline recommendation occurs in a larger scholarly article, use MedicalScholarlyArticle to tag the overall article, not this type. Note also: the organization making the recommendation should be captured in the recognizingAuthority base property of MedicalEntity." ;
+                                     rdfs:label "medical guideline" .
+
+
+###  http://schema.org/MedicalOrganization
+<http://schema.org/MedicalOrganization> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/Organization> ;
+                                        rdfs:comment "A medical organization (physical or not), such as hospital, institution or clinic." ;
+                                        rdfs:label "medical organization" .
+
+
+###  http://schema.org/MedicalProcedure
+<http://schema.org/MedicalProcedure> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                     rdfs:comment "A process of care used in either a diagnostic, therapeutic, preventive or palliative capacity that relies on invasive (surgical), non-invasive, or other techniques." ;
+                                     rdfs:label "medical procedure" .
+
+
+###  http://schema.org/MedicalSign
+<http://schema.org/MedicalSign> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/MedicalSignOrSymptom> ;
+                                rdfs:comment "Any physical manifestation of a person's medical condition discoverable by objective diagnostic tests or physical examination." ;
+                                rdfs:label "medical sign" .
+
+
+###  http://schema.org/MedicalSignOrSymptom
+<http://schema.org/MedicalSignOrSymptom> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://schema.org/MedicalCondition> ;
+                                         rdfs:comment "Any feature associated or not with a medical condition. In medicine a symptom is generally subjective while a sign is objective." ;
+                                         rdfs:label "medical sign or symptom" .
+
+
+###  http://schema.org/MedicalSpecialty
+<http://schema.org/MedicalSpecialty> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/MedicalEntity> ,
+                                                     <http://schema.org/Specialty> ;
+                                     rdfs:comment "Any specific branch of medical science or practice. Medical specialities include clinical specialties that pertain to particular organ systems and their respective disease states, as well as allied health specialties. Enumerated type." ;
+                                     rdfs:label "medical specialty" .
+
+
+###  http://schema.org/MedicalSymptom
+<http://schema.org/MedicalSymptom> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/MedicalSignOrSymptom> ;
+                                   rdfs:comment "Any complaint sensed and expressed by the patient (therefore defined as subjective)  like stomachache, lower-back pain, or fatigue." ;
+                                   rdfs:label "medical symptom" .
+
+
+###  http://schema.org/MedicalTest
+<http://schema.org/MedicalTest> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                                rdfs:comment "Any medical test, typically performed for diagnostic purposes." ;
+                                rdfs:label "medical test" .
+
+
+###  http://schema.org/MedicalTherapy
+<http://schema.org/MedicalTherapy> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/TherapeuticProcedure> ;
+                                   rdfs:comment "Any medical intervention designed to prevent, treat, and cure human diseases and medical conditions, including both curative and palliative therapies. Medical therapies are typically processes of care relying upon pharmacotherapy, behavioral therapy, supportive therapy (with fluid or nutrition for example), or detoxification (e.g. hemodialysis) aimed at improving or preventing a health condition." ;
+                                   rdfs:label "medical therapy" .
+
+
+###  http://schema.org/MiddleSchool
+<http://schema.org/MiddleSchool> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/EducationalOrganization> ;
+                                 rdfs:comment "A middle school (typically for children aged around 11-14, although this varies somewhat)." ;
+                                 rdfs:label "middle school" .
+
+
+###  http://schema.org/MobileApplication
+<http://schema.org/MobileApplication> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/SoftwareApplication> ;
+                                      rdfs:comment "A software application designed specifically to work well on a mobile device such as a telephone." ;
+                                      rdfs:label "mobile application" .
+
+
+###  http://schema.org/Mosque
+<http://schema.org/Mosque> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/PlaceOfWorship> ;
+                           rdfs:comment "A mosque." ;
+                           rdfs:label "mosque" .
+
+
+###  http://schema.org/Motel
+<http://schema.org/Motel> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/LodgingBusiness> ;
+                          rdfs:comment """A motel.
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                          rdfs:label "motel" .
+
+
+###  http://schema.org/Motorcycle
+<http://schema.org/Motorcycle> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/Vehicle> ;
+                               rdfs:comment "A motorcycle or motorbike is a single-track, two-wheeled motor vehicle." ;
+                               rdfs:label "motorcycle" .
+
+
+###  http://schema.org/Mountain
+<http://schema.org/Mountain> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Landform> ;
+                             rdfs:comment "A mountain, like Mount Whitney or Mount Everest." ;
+                             rdfs:label "mountain" .
+
+
+###  http://schema.org/Movie
+<http://schema.org/Movie> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                          rdfs:comment "A movie." ;
+                          rdfs:label "movie" .
+
+
+###  http://schema.org/MovieSeries
+<http://schema.org/MovieSeries> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                                rdfs:comment "A series of movies. Included movies can be indicated with the hasPart property." ;
+                                rdfs:label "movie series" .
+
+
+###  http://schema.org/MovieTheater
+<http://schema.org/MovieTheater> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                                 <http://schema.org/EntertainmentBusiness> ;
+                                 rdfs:comment "A movie theater." ;
+                                 rdfs:label "movie theater" .
+
+
+###  http://schema.org/Muscle
+<http://schema.org/Muscle> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/AnatomicalStructure> ;
+                           rdfs:comment "A muscle is an anatomical structure consisting of a contractile form of tissue that animals use to effect movement." ;
+                           rdfs:label "muscle" .
+
+
+###  http://schema.org/Museum
+<http://schema.org/Museum> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                           rdfs:comment "A museum." ;
+                           rdfs:label "museum" .
+
+
+###  http://schema.org/MusicAlbum
+<http://schema.org/MusicAlbum> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/MusicPlaylist> ;
+                               rdfs:comment "A collection of music tracks." ;
+                               rdfs:label "music album" .
+
+
+###  http://schema.org/MusicComposition
+<http://schema.org/MusicComposition> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                     rdfs:comment "A musical composition." ;
+                                     rdfs:label "music composition" .
+
+
+###  http://schema.org/MusicGroup
+<http://schema.org/MusicGroup> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/PerformingGroup> ;
+                               rdfs:comment "A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician." ;
+                               rdfs:label "music group" .
+
+
+###  http://schema.org/MusicPlaylist
+<http://schema.org/MusicPlaylist> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                  rdfs:comment "A collection of music tracks in playlist form." ;
+                                  rdfs:label "music playlist" .
+
+
+###  http://schema.org/MusicRelease
+<http://schema.org/MusicRelease> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/MusicPlaylist> ;
+                                 rdfs:comment "A MusicRelease is a specific release of a music album." ;
+                                 rdfs:label "music release" .
+
+
+###  http://schema.org/MusicVenue
+<http://schema.org/MusicVenue> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                               rdfs:comment "A music venue." ;
+                               rdfs:label "music venue" .
+
+
+###  http://schema.org/NGO
+<http://schema.org/NGO> rdf:type owl:Class ;
+                        rdfs:subClassOf <http://schema.org/Organization> ;
+                        rdfs:comment "Organization: Non-governmental Organization." ;
+                        rdfs:label "n g o" .
+
+
+###  http://schema.org/NailSalon
+<http://schema.org/NailSalon> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/HealthAndBeautyBusiness> ;
+                              rdfs:comment "A nail salon." ;
+                              rdfs:label "nail salon" .
+
+
+###  http://schema.org/Nerve
+<http://schema.org/Nerve> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/AnatomicalStructure> ;
+                          rdfs:comment "A common pathway for the electrochemical nerve impulses that are transmitted along each of the axons." ;
+                          rdfs:label "nerve" .
+
+
+###  http://schema.org/NewsArticle
+<http://schema.org/NewsArticle> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Article> ;
+                                rdfs:comment """A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news.<br/><br/>
+
+A more detailed overview of <a href=\"/docs/news.html\">schema.org News markup</a> is also available.""" ;
+                                rdfs:label "news article" .
+
+
+###  http://schema.org/Newspaper
+<http://schema.org/Newspaper> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Periodical> ;
+                              rdfs:comment "A publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily." ;
+                              rdfs:label "newspaper"@en .
+
+
+###  http://schema.org/NightClub
+<http://schema.org/NightClub> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/EntertainmentBusiness> ;
+                              rdfs:comment "A nightclub or discotheque." ;
+                              rdfs:label "night club" .
+
+
+###  http://schema.org/Occupation
+<http://schema.org/Occupation> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/Thing> ;
+                               rdfs:comment "A profession, may involve prolonged training and/or a formal qualification." ;
+                               rdfs:label "occupation" .
+
+
+###  http://schema.org/OceanBodyOfWater
+<http://schema.org/OceanBodyOfWater> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                                     rdfs:comment "An ocean (for example, the Pacific)." ;
+                                     rdfs:label "ocean body of water" .
+
+
+###  http://schema.org/Optician
+<http://schema.org/Optician> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/MedicalBusiness> ;
+                             rdfs:comment "A store that sells reading glasses and similar devices for improving vision." ;
+                             rdfs:label "optician" .
+
+
+###  http://schema.org/Organization
+<http://schema.org/Organization> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Thing> ;
+                                 owl:disjointWith <http://schema.org/Person> ;
+                                 rdfs:comment "An organization such as a school, NGO, corporation, club, etc." ;
+                                 rdfs:label "organization" .
+
+
+###  http://schema.org/OutletStore
+<http://schema.org/OutletStore> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Store> ;
+                                rdfs:comment "An outlet store." ;
+                                rdfs:label "outlet store" .
+
+
+###  http://schema.org/Painting
+<http://schema.org/Painting> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                             rdfs:comment "A painting." ;
+                             rdfs:label "painting" .
+
+
+###  http://schema.org/Park
+<http://schema.org/Park> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                         rdfs:comment "A park." ;
+                         rdfs:label "park" .
+
+
+###  http://schema.org/ParkingFacility
+<http://schema.org/ParkingFacility> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                    rdfs:comment "A parking lot or other parking facility." ;
+                                    rdfs:label "parking facility" .
+
+
+###  http://schema.org/PawnShop
+<http://schema.org/PawnShop> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Store> ;
+                             rdfs:comment "A shop that will buy, or lend money against the security of, personal possessions." ;
+                             rdfs:label "pawn shop" .
+
+
+###  http://schema.org/PerformingArtsTheater
+<http://schema.org/PerformingArtsTheater> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                          rdfs:comment "A theater or other performing art center." ;
+                                          rdfs:label "performing arts theater" .
+
+
+###  http://schema.org/PerformingGroup
+<http://schema.org/PerformingGroup> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/Organization> ;
+                                    rdfs:comment "A performance group, such as a band, an orchestra, or a circus." ;
+                                    rdfs:label "performing group" .
+
+
+###  http://schema.org/Periodical
+<http://schema.org/Periodical> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                               rdfs:comment """A publication in any medium issued in successive parts bearing numerical or chronological designations and intended, such as a magazine, scholarly journal, or newspaper to continue indefinitely.<br/><br/>
+
+See also <a href=\"http://blog.schema.org/2014/09/schemaorg-support-for-bibliographic_2.html\">blog post</a>.""" ;
+                               rdfs:label "periodical" .
+
+
+###  http://schema.org/Person
+<http://schema.org/Person> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Thing> ;
+                           owl:disjointWith <http://schema.org/Place> ;
+                           rdfs:comment "A person (alive, dead, undead, or fictional)." ;
+                           rdfs:label "person" .
+
+
+###  http://schema.org/PetStore
+<http://schema.org/PetStore> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Store> ;
+                             rdfs:comment "A pet store." ;
+                             rdfs:label "pet store" .
+
+
+###  http://schema.org/Pharmacy
+<http://schema.org/Pharmacy> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/MedicalBusiness> ,
+                                             <http://schema.org/MedicalOrganization> ;
+                             rdfs:comment "A pharmacy or drugstore." ;
+                             rdfs:label "pharmacy" .
+
+
+###  http://schema.org/Photograph
+<http://schema.org/Photograph> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                               rdfs:comment "A photograph." ;
+                               rdfs:label "photograph" .
+
+
+###  http://schema.org/PhysicalExam
+<http://schema.org/PhysicalExam> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/MedicalEntity> ,
+                                                 <http://schema.org/MedicalProcedure> ;
+                                 rdfs:comment "A type of physical examination of a patient performed by a physician." ;
+                                 rdfs:label "physical exam" .
+
+
+###  http://schema.org/Place
+<http://schema.org/Place> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/Thing> ;
+                          rdfs:comment "Entities that have a somewhat fixed, physical extension." ;
+                          rdfs:label "place" .
+
+
+###  http://schema.org/PlaceOfWorship
+<http://schema.org/PlaceOfWorship> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                   rdfs:comment "Place of worship, such as a church, synagogue, or mosque." ;
+                                   rdfs:label "place of worship" .
+
+
+###  http://schema.org/Play
+<http://schema.org/Play> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                         rdfs:comment "A play is a form of literature, usually consisting of dialogue between characters, intended for theatrical performance rather than just reading. Note the peformance of a Play would be a <a class=\"localLink\" href=\"http://schema.org/TheaterEvent\">TheaterEvent</a> - the <em>Play</em> being the <a class=\"localLink\" href=\"http://schema.org/workPerformed\">workPerformed</a>." ;
+                         rdfs:label "play" .
+
+
+###  http://schema.org/Playground
+<http://schema.org/Playground> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                               rdfs:comment "A playground." ;
+                               rdfs:label "playground" .
+
+
+###  http://schema.org/PodcastSeries
+<http://schema.org/PodcastSeries> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                                  rdfs:comment "A podcast is an episodic series of digital audio or video files which a user can download and listen to." ;
+                                  rdfs:label "podcast series" .
+
+
+###  http://schema.org/PoliceStation
+<http://schema.org/PoliceStation> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                                  <http://schema.org/EmergencyService> ;
+                                  rdfs:comment "A police station." ;
+                                  rdfs:label "police station" .
+
+
+###  http://schema.org/Pond
+<http://schema.org/Pond> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                         rdfs:comment "A pond." ;
+                         rdfs:label "pond" .
+
+
+###  http://schema.org/PostOffice
+<http://schema.org/PostOffice> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/GovernmentOffice> ;
+                               rdfs:comment "A post office." ;
+                               rdfs:label "post office" .
+
+
+###  http://schema.org/Poster
+<http://schema.org/Poster> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                           rdfs:comment "A large, usually printed placard, bill, or announcement, often illustrated, that is posted to advertise or publicize something." ;
+                           rdfs:label "poster" .
+
+
+###  http://schema.org/Preschool
+<http://schema.org/Preschool> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/EducationalOrganization> ;
+                              rdfs:comment "A preschool." ;
+                              rdfs:label "preschool" .
+
+
+###  http://schema.org/Product
+<http://schema.org/Product> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Thing> ;
+                            rdfs:comment "Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online." ;
+                            rdfs:label "product" .
+
+
+###  http://schema.org/ProductModel
+<http://schema.org/ProductModel> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Product> ;
+                                 rdfs:comment "A datasheet or vendor specification of a product (in the sense of a prototypical description)." ;
+                                 rdfs:label "product model" .
+
+
+###  http://schema.org/PublicSwimmingPool
+<http://schema.org/PublicSwimmingPool> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/SportsActivityLocation> ;
+                                       rdfs:comment "A public swimming pool." ;
+                                       rdfs:label "public swimming pool" .
+
+
+###  http://schema.org/PublicToilet
+<http://schema.org/PublicToilet> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                 rdfs:comment "A public toilet is a room or small building containing one or more toilets (and possibly also urinals) which is available for use by the general public, or by customers or employees of certain businesses." ;
+                                 rdfs:label "public toilet" .
+
+
+###  http://schema.org/PublicationIssue
+<http://schema.org/PublicationIssue> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                     rdfs:comment """A part of a successively published publication such as a periodical or publication volume, often numbered, usually containing a grouping of works such as articles.<br/><br/>
+
+See also <a href=\"http://blog.schema.org/2014/09/schemaorg-support-for-bibliographic_2.html\">blog post</a>.""" ;
+                                     rdfs:label "publication issue" .
+
+
+###  http://schema.org/PublicationVolume
+<http://schema.org/PublicationVolume> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                      rdfs:comment """A part of a successively published publication such as a periodical or multi-volume work, often numbered. It may represent a time span, such as a year.<br/><br/>
+
+See also <a href=\"http://blog.schema.org/2014/09/schemaorg-support-for-bibliographic_2.html\">blog post</a>.""" ;
+                                      rdfs:label "publication volume" .
+
+
+###  http://schema.org/QuantitativeValue
+<http://schema.org/QuantitativeValue> rdf:type owl:Class ;
+                                      rdfs:comment "A point value or interval for product characteristics and other purposes." ;
+                                      rdfs:label "quantitative value" .
+
+
+###  http://schema.org/RadiationTherapy
+<http://schema.org/RadiationTherapy> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/MedicalTherapy> ;
+                                     rdfs:comment "A process of care using radiation aimed at improving a health condition." ;
+                                     rdfs:label "radiation therapy" .
+
+
+###  http://schema.org/RadioChannel
+<http://schema.org/RadioChannel> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/BroadcastChannel> ;
+                                 rdfs:comment "A unique instance of a radio BroadcastService on a CableOrSatelliteService lineup." ;
+                                 rdfs:label "radio channel" .
+
+
+###  http://schema.org/RadioSeries
+<http://schema.org/RadioSeries> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                                rdfs:comment "CreativeWorkSeries dedicated to radio broadcast and associated online delivery." ;
+                                rdfs:label "radio series" .
+
+
+###  http://schema.org/RadioStation
+<http://schema.org/RadioStation> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                 rdfs:comment "A radio station." ;
+                                 rdfs:label "radio station" .
+
+
+###  http://schema.org/Rating
+<http://schema.org/Rating> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Thing> ;
+                           rdfs:comment "A rating is an evaluation on a numeric scale, such as 1 to 5 stars." ;
+                           rdfs:label "rating" .
+
+
+###  http://schema.org/RecyclingCenter
+<http://schema.org/RecyclingCenter> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                    rdfs:comment "A recycling center." ;
+                                    rdfs:label "recycling center" .
+
+
+###  http://schema.org/Report
+<http://schema.org/Report> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/Article> ;
+                           rdfs:comment "A Report generated by governmental or non-governmental organization." ;
+                           rdfs:label "report" .
+
+
+###  http://schema.org/Reservoir
+<http://schema.org/Reservoir> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                              rdfs:comment "A reservoir of water, typically an artificially created lake, like the Lake Kariba reservoir." ;
+                              rdfs:label "reservoir" .
+
+
+###  http://schema.org/Resort
+<http://schema.org/Resort> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/LodgingBusiness> ;
+                           rdfs:comment """A resort is a place used for relaxation or recreation, attracting visitors for holidays or vacations. Resorts are places, towns or sometimes commercial establishment operated by a single company (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/Resort\">http://en.wikipedia.org/wiki/Resort</a>).
+<br /><br />
+See also the <a href=\"/docs/hotels.html\">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
+                           rdfs:label "resort" .
+
+
+###  http://schema.org/Restaurant
+<http://schema.org/Restaurant> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                               rdfs:comment "A restaurant." ;
+                               rdfs:label "restaurant" .
+
+
+###  http://schema.org/RiverBodyOfWater
+<http://schema.org/RiverBodyOfWater> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                                     rdfs:comment "A river (for example, the broad majestic Shannon)." ;
+                                     rdfs:label "river body of water" .
+
+
+###  http://schema.org/ScholarlyArticle
+<http://schema.org/ScholarlyArticle> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://schema.org/Article> ;
+                                     rdfs:comment "A scholarly article." ;
+                                     rdfs:label "scholarly article" .
+
+
+###  http://schema.org/School
+<http://schema.org/School> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/EducationalOrganization> ;
+                           rdfs:comment "A school." ;
+                           rdfs:label "school" .
+
+
+###  http://schema.org/Sculpture
+<http://schema.org/Sculpture> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                              rdfs:comment "A piece of sculpture." ;
+                              rdfs:label "sculpture" .
+
+
+###  http://schema.org/SeaBodyOfWater
+<http://schema.org/SeaBodyOfWater> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                                   rdfs:comment "A sea (for example, the Caspian sea)." ;
+                                   rdfs:label "sea body of water" .
+
+
+###  http://schema.org/SelfStorage
+<http://schema.org/SelfStorage> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                rdfs:comment "A self-storage facility." ;
+                                rdfs:label "self storage" .
+
+
+###  http://schema.org/Service
+<http://schema.org/Service> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Thing> ;
+                            rdfs:comment "A service provided by an organization, e.g. delivery service, print services, etc." ;
+                            rdfs:label "service" .
+
+
+###  http://schema.org/SheetMusic
+<http://schema.org/SheetMusic> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                               rdfs:comment "Printed music, as opposed to performed or recorded music." ;
+                               rdfs:label "sheet music" .
+
+
+###  http://schema.org/ShoeStore
+<http://schema.org/ShoeStore> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Store> ;
+                              rdfs:comment "A shoe store." ;
+                              rdfs:label "shoe store" .
+
+
+###  http://schema.org/ShoppingCenter
+<http://schema.org/ShoppingCenter> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                   rdfs:comment "A shopping center or mall." ;
+                                   rdfs:label "shopping center" .
+
+
+###  http://schema.org/SkiResort
+<http://schema.org/SkiResort> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/SportsActivityLocation> ;
+                              rdfs:comment "A ski resort." ;
+                              rdfs:label "ski resort" .
+
+
+###  http://schema.org/SocialMediaPosting
+<http://schema.org/SocialMediaPosting> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/Article> ;
+                                       rdfs:comment "A post to a social media platform, including blog posts, tweets, Facebook posts, etc." ;
+                                       rdfs:label "social media posting" .
+
+
+###  http://schema.org/SoftwareApplication
+<http://schema.org/SoftwareApplication> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                        rdfs:comment "A software application." ;
+                                        rdfs:label "software application" .
+
+
+###  http://schema.org/Specialty
+<http://schema.org/Specialty> rdf:type owl:Class .
+
+
+###  http://schema.org/SportsActivityLocation
+<http://schema.org/SportsActivityLocation> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                           rdfs:comment "A sports location, such as a playing field." ;
+                                           rdfs:label "sports activity location" .
+
+
+###  http://schema.org/SportsEvent
+<http://schema.org/SportsEvent> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/Event> ;
+                                rdfs:comment "Event type: Sports event." ;
+                                rdfs:label "sports event" .
+
+
+###  http://schema.org/SportsOrganization
+<http://schema.org/SportsOrganization> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://schema.org/Organization> ;
+                                       rdfs:comment "Represents the collection of all sports organizations, including sports teams, governing bodies, and sports associations." ;
+                                       rdfs:label "sports organization" .
+
+
+###  http://schema.org/SportsTeam
+<http://schema.org/SportsTeam> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://schema.org/SportsOrganization> ;
+                               rdfs:comment "Organization: Sports team." ;
+                               rdfs:label "sports team" .
+
+
+###  http://schema.org/StadiumOrArena
+<http://schema.org/StadiumOrArena> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://schema.org/CivicStructure> ,
+                                                   <http://schema.org/SportsActivityLocation> ;
+                                   rdfs:comment "A stadium." ;
+                                   rdfs:label "stadium or arena" .
+
+
+###  http://schema.org/State
+<http://schema.org/State> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/AdministrativeArea> ;
+                          rdfs:comment "A state or province of a country." ;
+                          rdfs:label "state" .
+
+
+###  http://schema.org/Store
+<http://schema.org/Store> rdf:type owl:Class ;
+                          rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                          rdfs:comment "A retail good store." ;
+                          rdfs:label "store" .
+
+
+###  http://schema.org/Substance
+<http://schema.org/Substance> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/MedicalEntity> ;
+                              rdfs:comment "Any matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical." ;
+                              rdfs:label "substance" .
+
+
+###  http://schema.org/SubwayStation
+<http://schema.org/SubwayStation> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                  rdfs:comment "A subway station." ;
+                                  rdfs:label "subway station" .
+
+
+###  http://schema.org/SurgicalProcedure
+<http://schema.org/SurgicalProcedure> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/MedicalProcedure> ;
+                                      rdfs:comment "A medical procedure involving an incision with instruments; performed for diagnose, or therapeutic purposes." ;
+                                      rdfs:label "surgical procedure" .
+
+
+###  http://schema.org/Synagogue
+<http://schema.org/Synagogue> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/PlaceOfWorship> ;
+                              rdfs:comment "A synagogue." ;
+                              rdfs:label "synagogue" .
+
+
+###  http://schema.org/TVEpisode
+<http://schema.org/TVEpisode> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Episode> ;
+                              rdfs:comment "A TV episode which can be part of a series or season." ;
+                              rdfs:label "t v episode" .
+
+
+###  http://schema.org/TVSeason
+<http://schema.org/TVSeason> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CreativeWork> ,
+                                             <http://schema.org/CreativeWorkSeason> ;
+                             rdfs:comment "Season dedicated to TV broadcast and associated online delivery." ;
+                             rdfs:label "t v season" .
+
+
+###  http://schema.org/TVSeries
+<http://schema.org/TVSeries> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/CreativeWork> ,
+                                             <http://schema.org/CreativeWorkSeries> ;
+                             rdfs:comment "CreativeWorkSeries dedicated to TV broadcast and associated online delivery." ;
+                             rdfs:label "t v series" .
+
+
+###  http://schema.org/TattooParlor
+<http://schema.org/TattooParlor> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/HealthAndBeautyBusiness> ;
+                                 rdfs:comment "A tattoo parlor." ;
+                                 rdfs:label "tattoo parlor" .
+
+
+###  http://schema.org/TelevisionChannel
+<http://schema.org/TelevisionChannel> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/BroadcastChannel> ;
+                                      rdfs:comment "A unique instance of a television BroadcastService on a CableOrSatelliteService lineup." ;
+                                      rdfs:label "television channel" .
+
+
+###  http://schema.org/TelevisionStation
+<http://schema.org/TelevisionStation> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                      rdfs:comment "A television station." ;
+                                      rdfs:label "television station" .
+
+
+###  http://schema.org/TennisComplex
+<http://schema.org/TennisComplex> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/SportsActivityLocation> ;
+                                  rdfs:comment "A tennis complex." ;
+                                  rdfs:label "tennis complex" .
+
+
+###  http://schema.org/TheaterGroup
+<http://schema.org/TheaterGroup> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/PerformingGroup> ;
+                                 rdfs:comment "A theater group or company, for example, the Royal Shakespeare Company or Druid Theatre." ;
+                                 rdfs:label "theater group" .
+
+
+###  http://schema.org/TherapeuticProcedure
+<http://schema.org/TherapeuticProcedure> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://schema.org/MedicalProcedure> ;
+                                         rdfs:comment "A medical procedure intended primarily for therapeutic purposes, aimed at improving a health condition." ;
+                                         rdfs:label "therapeutic procedure" .
+
+
+###  http://schema.org/Thesis
+<http://schema.org/Thesis> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                           rdfs:comment "A thesis or dissertation document submitted in support of candidature for an academic degree or professional qualification." ;
+                           rdfs:label "thesis"@en .
+
+
+###  http://schema.org/Thing
+<http://schema.org/Thing> rdf:type owl:Class ;
+                          rdfs:comment "The most generic type of item." ;
+                          rdfs:label "thing" .
+
+
+###  http://schema.org/TouristAttraction
+<http://schema.org/TouristAttraction> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://schema.org/Place> ;
+                                      rdfs:comment "A tourist attraction.  In principle any Thing can be a <a class=\"localLink\" href=\"http://schema.org/TouristAttraction\">TouristAttraction</a>, from a <a class=\"localLink\" href=\"http://schema.org/Mountain\">Mountain</a> and <a class=\"localLink\" href=\"http://schema.org/LandmarksOrHistoricalBuildings\">LandmarksOrHistoricalBuildings</a> to a <a class=\"localLink\" href=\"http://schema.org/LocalBusiness\">LocalBusiness</a>.  This Type can be used on its own to describe a general <a class=\"localLink\" href=\"http://schema.org/TouristAttraction\">TouristAttraction</a>, or be used as an <a class=\"localLink\" href=\"http://schema.org/additionalType\">additionalType</a> to add tourist attraction properties to any other type.  (See examples below)" ;
+                                      rdfs:label "tourist attraction" .
+
+
+###  http://schema.org/TouristInformationCenter
+<http://schema.org/TouristInformationCenter> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                             rdfs:comment "A tourist information center." ;
+                                             rdfs:label "tourist information center" .
+
+
+###  http://schema.org/ToyStore
+<http://schema.org/ToyStore> rdf:type owl:Class ;
+                             rdfs:subClassOf <http://schema.org/Store> ;
+                             rdfs:comment "A toy store." ;
+                             rdfs:label "toy store" .
+
+
+###  http://schema.org/TrainStation
+<http://schema.org/TrainStation> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                                 rdfs:comment "A train station." ;
+                                 rdfs:label "train station" .
+
+
+###  http://schema.org/TravelAgency
+<http://schema.org/TravelAgency> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/LocalBusiness> ;
+                                 rdfs:comment "A travel agency." ;
+                                 rdfs:label "travel agency" .
+
+
+###  http://schema.org/Vehicle
+<http://schema.org/Vehicle> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Product> ;
+                            rdfs:comment "A vehicle is a device that is designed or used to transport people or cargo over land, water, air, or through space." ;
+                            rdfs:label "vehicle" .
+
+
+###  http://schema.org/Vein
+<http://schema.org/Vein> rdf:type owl:Class ;
+                         rdfs:subClassOf <http://schema.org/Vessel> ;
+                         rdfs:comment "A type of blood vessel that specifically carries blood to the heart." ;
+                         rdfs:label "vein" .
+
+
+###  http://schema.org/Vessel
+<http://schema.org/Vessel> rdf:type owl:Class .
+
+
+###  http://schema.org/VideoGame
+<http://schema.org/VideoGame> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/Game> ,
+                                              <http://schema.org/SoftwareApplication> ;
+                              rdfs:comment "A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device." ;
+                              rdfs:label "video game" .
+
+
+###  http://schema.org/VideoGameSeries
+<http://schema.org/VideoGameSeries> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://schema.org/CreativeWorkSeries> ;
+                                    rdfs:comment "A video game series." ;
+                                    rdfs:label "video game series" .
+
+
+###  http://schema.org/VideoObject
+<http://schema.org/VideoObject> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://schema.org/MediaObject> ;
+                                rdfs:comment "A video file." ;
+                                rdfs:label "video object" .
+
+
+###  http://schema.org/VisualArtwork
+<http://schema.org/VisualArtwork> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                                  rdfs:comment "A work of art that is primarily visual in character." ;
+                                  rdfs:label "visual artwork" .
+
+
+###  http://schema.org/Volcano
+<http://schema.org/Volcano> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/Landform> ;
+                            rdfs:comment "A volcano, like Fuji san." ;
+                            rdfs:label "volcano" .
+
+
+###  http://schema.org/Waterfall
+<http://schema.org/Waterfall> rdf:type owl:Class ;
+                              rdfs:subClassOf <http://schema.org/BodyOfWater> ;
+                              rdfs:comment "A waterfall, like Niagara." ;
+                              rdfs:label "waterfall" .
+
+
+###  http://schema.org/WebPage
+<http://schema.org/WebPage> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A web page. Every web page is implicitly assumed to be declared to be of type WebPage, so the various properties about that webpage, such as <code>breadcrumb</code> may be used. We recommend explicit declaration if these properties are specified, but if they are found outside of an itemscope, they will be assumed to be about the page." ;
+                            rdfs:label "web page" .
+
+
+###  http://schema.org/WebSite
+<http://schema.org/WebSite> rdf:type owl:Class ;
+                            rdfs:subClassOf <http://schema.org/CreativeWork> ;
+                            rdfs:comment "A WebSite is a set of related web pages and other items typically served from a single web domain and accessible via URLs." ;
+                            rdfs:label "web site" .
+
+
+###  http://schema.org/Winery
+<http://schema.org/Winery> rdf:type owl:Class ;
+                           rdfs:subClassOf <http://schema.org/FoodEstablishment> ;
+                           rdfs:comment "A winery." ;
+                           rdfs:label "winery" .
+
+
+###  http://schema.org/WorkersUnion
+<http://schema.org/WorkersUnion> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://schema.org/Organization> ;
+                                 rdfs:comment "A Workers Union (also known as a Labor Union, Labour Union, or Trade Union) is an organization that promotes the interests of its worker members by collectively bargaining with management, organizing, and political lobbying." ;
+                                 rdfs:label "workers union" .
+
+
+###  http://schema.org/Zoo
+<http://schema.org/Zoo> rdf:type owl:Class ;
+                        rdfs:subClassOf <http://schema.org/CivicStructure> ;
+                        rdfs:comment "A zoo." ;
+                        rdfs:label "zoo" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
