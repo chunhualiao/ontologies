@@ -2,9 +2,10 @@
 Archives of some popular ontologies
 
 
+The Software Ontology: https://github.com/allysonlister/swo
 
 
-Machine learning and Ontologies
+## Machine learning and Ontologies
 * Sacha, Dominik, et al. "Vis4ml: An ontology for visual analytics assisted machine learning." IEEE transactions on visualization and computer graphics 25.1 (2018): 385-395.
 
 * K. Sudathip and M. Sodanil. Ontology knowledge-based framework for machine learning concept. In Proc. of the 18th int. Conference on Information Integration and Web-based Applications and Services, iiWAS, pp. 50–53, 2016. doi: 10.1145/3011141.3011207
